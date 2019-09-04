@@ -1,0 +1,51 @@
+User
+- Username
+- Password
+- Email
+
+Profile
+- Role
+
+Permission
+- Name
+
+Role
+- Name
+- IsInternal
+
+
+Company
+- Name
+- Account
+- Email
+- Password
+
+CompanyUser
+- Profile
+- Company
+
+Region
+- Company
+- Name
+- Price
+- isActive
+
+Payment
+- TransID
+- TransDate
+- SourceAccount
+- DestAccount
+- Author
+
+Ticket
+- TransID
+- UnitPrice
+- TotalPrice
+- NoOfTickets
+- Balance
+- Issuer
+- Region
+
+
+
+
