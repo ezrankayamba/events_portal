@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+{% block content %}
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">The Company</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="regions-tab" data-toggle="tab" href="#regions" role="tab" aria-controls="regions" aria-selected="true">Regions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="profile" aria-selected="false">Users</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <article>
+        <h3>{{ object.name }}</h3>
+        <ul>
+          <li>Account: {{ object.account }}</li>
+          <li>Email: {{ object.email }}</li>
+          <li>Password: {{ object.password }}</li>
+        </ul>
+      </article>
+    </div>
+    <div class="tab-pane fade" id="regions" role="tabpanel" aria-labelledby="regions-tab">
+      <p>Regions tab</p>
+    </div>
+    <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+      <p>Users tab</p>
+    </div>
+  </div>
+{% endblock content%}

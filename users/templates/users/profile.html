@@ -1,4 +1,4 @@
-{% extends "payments/base.html" %}
+{% extends "base/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
@@ -12,7 +12,7 @@
       <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
-              <legend class="borde-botton mb-4">Profile Info</legend>
+              <legend class="borde-botton mb-2">Profile Info</legend>
               {{ u_form|crispy }}
               {{ p_form|crispy }}
           </fieldset>
