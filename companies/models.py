@@ -30,10 +30,13 @@ class Region(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT, null=True)
     is_active = models.BooleanField(default=False)
     price = models.DecimalField(decimal_places=0, max_digits=20)
-    company_users = models.ManyToManyField(CompanyUser)
+    company_users = models.ManyToManyField(CompanyUser, blank=True)
 
     class Meta:
         ordering = ('name',)
 
     def __str__(self):
         return f'{self.name}'
+
+    def get_absolute_url(self):
+        return reverse('company-detail', kwargs={'pk': self.company_id})

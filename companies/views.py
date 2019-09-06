@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Company
+from .models import Company, Region, CompanyUser
 from django.contrib.auth.models import User
+from django import forms
 from django.views.generic import (
     ListView,
     DetailView,
@@ -36,7 +37,6 @@ class CompanyCreateView(LoginRequiredMixin, CreateView):
     fields = ['name', 'account', 'email', 'password']
 
     def form_valid(self, form):
-        # form.instance.author = self.request.user
         return super().form_valid(form)
 
 
@@ -49,3 +49,27 @@ class CompanyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return True
+
+# Regions
+
+
+class RegionForm(forms.ModelForm):
+    class Meta:
+        model = Region
+        fields = ['name', 'company', 'price', 'company_users']
+        widgets = {
+            'company': forms.HiddenInput,
+        }
+
+
+class RegionCreateView(LoginRequiredMixin, CreateView):
+    model = Region
+    form_class = RegionForm
+
+    def get_initial(self, *args, **kwargs):
+        initial = super(RegionCreateView, self).get_initial(**kwargs)
+        initial['company'] = self.kwargs.get('company_id')
+        return initial
+
+    def form_valid(self, form):
+        return super().form_valid(form)
