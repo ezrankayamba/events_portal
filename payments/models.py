@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from companies.models import Region, CompanyUser
+from companies.models import Region, CompanyUser, Company
 
 
 class Payment(models.Model):
@@ -14,6 +14,8 @@ class Payment(models.Model):
     record_date = models.DateTimeField(default=timezone.now)
     trans_date = models.DateTimeField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.ForeignKey(
+        Company, to_field='account', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.trans_id if self.trans_id else 'None'
@@ -29,7 +31,8 @@ class Ticket(models.Model):
     ticket_value = models.DecimalField(decimal_places=0, max_digits=20)
     ticket_count = models.IntegerField()
     balance = models.DecimalField(decimal_places=0, max_digits=20, null=True)
-    issuer = models.ForeignKey(CompanyUser, on_delete=models.CASCADE, null=True)
+    issuer = models.ForeignKey(
+        CompanyUser, on_delete=models.CASCADE, null=True)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

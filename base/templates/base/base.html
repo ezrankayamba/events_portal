@@ -31,7 +31,14 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-                <a class="nav-item nav-link" href="{% url 'companies-home' %}">Companies</a>
+                {% if user.companyuser %}
+                  <a class="nav-item nav-link" href="{% url 'company-detail' user.companyuser.company.id %}">My Company</a>
+                  <a class="nav-item nav-link" href="{% url 'company-payments' user.companyuser.company.id %}">My Payments</a>
+                  <a class="nav-item nav-link" href="{% url 'company-tickets' user.companyuser.company.id %}">Tickets</a>
+                {% else %}
+                  <a class="nav-item nav-link" href="{% url 'companies-home' %}">All Companies</a>
+                  <a class="nav-item nav-link" href="{% url 'payments-home' %}">All Payments</a>
+                {% endif %}
                 <a class="nav-item nav-link disabled">|</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>

@@ -2,10 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'company-detail' company.id %}">{{ company }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">New Region</li>
+          </ol>
+        </nav>
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="borde-botton mb-4">New Region</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">

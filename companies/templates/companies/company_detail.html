@@ -1,14 +1,15 @@
 {% extends "base/base.html" %}
+{% load humanize %}
 {% block content %}
   <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ object.name }}</a>
+    <li class="nav-item pl-2">
+      <a class="nav-link pl-4 pr-4 active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ object.name }}</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" id="regions-tab" data-toggle="tab" href="#regions" role="tab" aria-controls="regions" aria-selected="true">Regions</a>
+    <li class="nav-item pl-2">
+      <a class="nav-link pl-4 pr-4" id="regions-tab" data-toggle="tab" href="#regions" role="tab" aria-controls="regions" aria-selected="true">Regions</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="profile" aria-selected="false">Users</a>
+    <li class="nav-item pl-2">
+      <a class="nav-link pl-4 pr-4" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="profile" aria-selected="false">Users</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -17,7 +18,7 @@
         <ul class="list-group">
           <li class="list-group-item"><span class="oi oi-arrow-circle-right"></span> Account: {{ object.account }}</li>
           <li class="list-group-item"><span class="oi oi-arrow-circle-right"></span> Email: {{ object.email }}</li>
-          <li class="list-group-item"><span class="oi oi-arrow-circle-right"></span> Password: {{ object.password }}</li>
+          <li class="list-group-item"><span class="oi oi-arrow-circle-right"></span> Password: *****</li>
         </ul>
       </article>
     </div>
@@ -37,7 +38,7 @@
               {% for m in object.region_set.all %}
                       <tr>
                         <td scope="row">{{ m.name }}</td>
-                        <td>{{ m.price }}</td>
+                        <td>{{ m.price|intcomma }}</td>
                         <td>
                           <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
                           <a href="{% url 'company-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
@@ -54,21 +55,23 @@
     </div>
     <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
       <article class="p-2">
-        <a href="{% url 'region-create' object.id %}" class="btn btn-primary btn-sm mb-2"><span class="oi oi-plus"></span> Add</a>
-          {% if object.region_set.all %}
+        <a href="{% url 'company-user-create' object.id %}" class="btn btn-primary btn-sm mb-2"><span class="oi oi-plus"></span> Add</a>
+          {% if object.companyuser_set.all %}
               <table class="table table-bordered table-sm table-striped table-hover">
                   <thead>
                       <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
                         <th scope="col"></th>
                       </tr>
                   </thead>
                   <tbody>
-              {% for m in object.region_set.all %}
+              {% for m in object.companyuser_set.all %}
                       <tr>
-                        <td scope="row">{{ m.name }}</td>
-                        <td>{{ m.price }}</td>
+                        <td scope="row">{{ m.user.username }}</td>
+                        <td>{{ m.user.email }}</td>
+                        <td>{{ m.user.profile.role }}</td>
                         <td>
                           <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
                           <a href="{% url 'company-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
