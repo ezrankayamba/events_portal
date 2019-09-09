@@ -25,7 +25,7 @@ SECRET_KEY = '&m7=sr!6@59v%dlgutdycxrtah0m)&gu&n(sy!knxqa(nmx+yb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','pincomtz.net','3.9.255.250']
+ALLOWED_HOSTS = ['localhost','pincomtz.net','3.9.255.250']
 
 
 # Application definition

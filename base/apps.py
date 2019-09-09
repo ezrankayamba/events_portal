@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 from nots.views import main as readmail
-import time
+import threading
 
 
 class BaseConfig(AppConfig):
@@ -9,4 +9,4 @@ class BaseConfig(AppConfig):
 
     def ready(self):
         print(f'The base application is now running')
-        readmail()
+        threading.Thread(target=readmail).start()
