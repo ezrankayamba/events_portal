@@ -1,27 +1,26 @@
 {% extends "base/base.html" %}
+{% load humanize %}
 {% block content %}
     <h3>List of Payments</h3>
     {% if payments %}
         <table class="table table-bordered table-sm table-striped table-hover">
             <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Account</th>
-                  <th scope="col">Email</th>
-                  <th scope="col"></th>
+                  <th scope="col">Trans ID</th>
+                  <th scope="col">Payer MSISDN</th>
+                  <th scope="col">Payer Name</th>
+                  <th scope="col">Trans Date</th>
+                  <th scope="col">Amount</th>
                 </tr>
             </thead>
             <tbody>
         {% for m in payments %}
                 <tr>
-                  <td scope="row">{{ m.name }}</td>
-                  <td>{{ m.account }}</td>
-                  <td>{{ m.email }}</td>
-                  <td>
-                    <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
-                    <a href="{% url 'company-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
-                    <a href="{% url 'company-detail' m.id %}" class="btn btn-sm"><span class="oi oi-cog"></span></a>
-                  </td>
+                  <td scope="row">{{ m.trans_id }}</td>
+                  <td scope="row">{{ m.payer_account }}</td>
+                  <td>{{ m.payer_name }}</td>
+                  <td>{{ m.trans_date|date:"d/m/y H:i" }}</td>
+                  <td>{{ m.amount|intcomma }}</td>
                 </tr>
         {% endfor %}
             </tbody>

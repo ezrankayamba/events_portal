@@ -2,10 +2,11 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from companies.models import Region, CompanyUser, Company
+from django.urls import reverse
 
 
 class Payment(models.Model):
-    trans_id = models.CharField(max_length=40, null=True)
+    trans_id = models.CharField(max_length=40, null=True, unique=True)
     payer_account = models.CharField(max_length=40)
     payer_name = models.CharField(max_length=40, null=True)
     payee_account = models.CharField(max_length=40, null=True)
@@ -14,8 +15,7 @@ class Payment(models.Model):
     record_date = models.DateTimeField(default=timezone.now)
     trans_date = models.DateTimeField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    company = models.ForeignKey(
-        Company, to_field='account', null=True, on_delete=models.SET_NULL)
+    company = models.ForeignKey(Company, to_field='account', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.trans_id if self.trans_id else 'None'

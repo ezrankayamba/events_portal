@@ -1,12 +1,12 @@
 from django.apps import AppConfig
-from nots.views import main as readmail
 import threading
 
 
 class BaseConfig(AppConfig):
     name = 'base'
-    verbose_name = "Base Application"
+    verbose_name = "Base Module"
 
     def ready(self):
+        from nots import background
         print(f'The base application is now running')
-        threading.Thread(target=readmail).start()
+        threading.Thread(target=background.mail_reader_thread).start()
