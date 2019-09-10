@@ -32,7 +32,7 @@ def record_payment(params, author, company):
                           trans_date=datetime.datetime.strptime(params['trans_date'], '%d/%m/%y %H:%M'),
                           author=author,
                           company=company)
-       payment.save()
+        payment.save()
     except Exception as e:
         print(e)
 
