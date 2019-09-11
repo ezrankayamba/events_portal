@@ -98,9 +98,8 @@ class CompanyUserCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-        print('Cleaned data: ', form.cleaned_data)
         user = User(username=data['username'], email=data['email'])
-        user.set_password('testing321')
+        user.set_password('Fiesta19')
         user.save()
         profile = user.profile
         profile.role = Role.objects.get(pk=data['role'])
