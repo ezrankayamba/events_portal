@@ -41,7 +41,7 @@ class UserTicketingFormListView(LoginRequiredMixin, FormView):
         initial = super(UserTicketingFormListView, self).get_initial(**kwargs)
         company_id = self.kwargs.get('company_id')
         self.company = Company.objects.filter(pk=company_id).first()
-        self.success_url = reverse('company-tickets', kwargs={'company_id': company_id})
+        self.success_url = reverse('user-ticketing', kwargs={'company_id': company_id})
         return initial
 
     def get_context_data(self, **kwargs):
