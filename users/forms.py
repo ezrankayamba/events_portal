@@ -24,3 +24,7 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+
+class PasswordChangeForm(forms.Form):
+    new_password = forms.CharField(label="Enter your new password", widget=forms.PasswordInput)

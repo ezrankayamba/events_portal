@@ -39,9 +39,6 @@
                   <a class="nav-item nav-link" href="{% url 'companies-home' %}">All Companies</a>
                   <a class="nav-item nav-link" href="{% url 'payments-home' %}">All Payments</a>
                 {% endif %}
-                <a class="nav-item nav-link disabled">|</a>
-                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
               {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
@@ -62,7 +59,7 @@
           {% block content %}{% endblock %}
         </div>
         <div class="col-md-4">
-          <div class="content-section">
+          <div class="small content-section">
             <h5>Events Portal</h5>
             <p class='text-muted'>Supported payment channels
               <ul class="list-group">
@@ -75,7 +72,10 @@
               </ul>
             </p>
             {% if user.is_authenticated %}
-              <p>Logged in as: {{ user }}</p>
+              <h6 class="m-0 p-0">Logged in as: {{ user }}</h6>
+              <a class="pl-0 pb-0 nav-item nav-link" href="{% url 'profile' %}"><span class="mr-2 oi oi-person"></span> My Profile</a>
+              <a class="pl-0 pb-0 nav-item nav-link" href="{% url 'change-password' %}"><span class="mr-2 oi oi-lock-locked"></span> Change Password</a>
+              <a class="pl-0 pb-0 nav-item nav-link" href="{% url 'logout' %}"><span class="mr-2 oi oi-account-logout"></span> Logout</a>
             {% endif %}
           </div>
         </div>
