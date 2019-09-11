@@ -35,6 +35,7 @@ class Ticket(models.Model):
     issuer = models.ForeignKey(
         CompanyUser, on_delete=models.CASCADE, null=True)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True)
+    get_latest_by = ['-issue_date']
 
     def __str__(self):
         return self.payment.trans_id

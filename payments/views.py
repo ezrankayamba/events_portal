@@ -7,16 +7,12 @@ from django.contrib.auth.models import User
 from .forms import IssueTicketForm
 from django.urls import reverse
 from django.contrib import messages
-from django.views.generic import (
-    ListView,
-    DetailView,
-    CreateView,
-    UpdateView,
-    DeleteView
-)
+from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
+from django.http import HttpResponse
+from .resources import PaymentResource, TicketResource
 
 
-class PaymentsListView(ListView):
+class PaymentsListView(LoginRequiredMixin, ListView):
     model = Payment
     template_name = 'payments/home.html'
     context_object_name = 'payments'
@@ -24,7 +20,7 @@ class PaymentsListView(ListView):
     paginate_by = 5
 
 
-class MyCompanyPaymentListView(ListView):
+class CompanyPaymentListView(LoginRequiredMixin, ListView):
     model = Payment
     template_name = 'payments/home.html'
     context_object_name = 'payments'
@@ -36,13 +32,13 @@ class MyCompanyPaymentListView(ListView):
         return Payment.objects.filter(company=company).order_by('-trans_date')
 
 
-class MyCompanyTicketsListView(LoginRequiredMixin, FormView):
+class UserTicketingFormListView(LoginRequiredMixin, FormView):
     form_class = IssueTicketForm
-    template_name = 'payments/tickets.html'
+    template_name = 'payments/ticketing.html'
     success_url = '/'
 
     def get_initial(self, *args, **kwargs):
-        initial = super(MyCompanyTicketsListView, self).get_initial(**kwargs)
+        initial = super(UserTicketingFormListView, self).get_initial(**kwargs)
         company_id = self.kwargs.get('company_id')
         self.company = Company.objects.filter(pk=company_id).first()
         self.success_url = reverse('company-tickets', kwargs={'company_id': company_id})
@@ -51,8 +47,8 @@ class MyCompanyTicketsListView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         company_id = self.kwargs.get('company_id')
         kwargs['company'] = Company.objects.filter(pk=company_id).first()
-        kwargs['tickets'] = self.request.user.companyuser.ticket_set.all()
-        return super(MyCompanyTicketsListView, self).get_context_data(**kwargs)
+        kwargs['tickets'] = Ticket.objects.filter(issuer=self.request.user.companyuser).order_by('-issue_date')
+        return super(UserTicketingFormListView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
         user = self.request.user
@@ -70,13 +66,7 @@ class MyCompanyTicketsListView(LoginRequiredMixin, FormView):
             elif not count:
                 messages.warning(self.request, 'Fail, not enough amount to purchase a ticket!')
             else:
-                ticket = Ticket(payment=payment,
-                                unit_price=unit_price,
-                                ticket_value=payment.amount,
-                                ticket_count=count,
-                                balance=balance,
-                                issuer=cu,
-                                region=cu.region)
+                ticket = Ticket(payment=payment, unit_price=unit_price, ticket_value=payment.amount, ticket_count=count, balance=balance, issuer=cu, region=cu.region)
                 ticket.save()
                 payment.ticket_issued = True
                 payment.save()
@@ -84,3 +74,42 @@ class MyCompanyTicketsListView(LoginRequiredMixin, FormView):
         else:
             messages.warning(self.request, 'Failed, review your inputs and resubmit!')
         return super().form_valid(form)
+
+
+class CompanyTicketsListView(LoginRequiredMixin, ListView):
+    model = Ticket
+    template_name = 'payments/tickets.html'
+    context_object_name = 'tickets'
+    ordering = ['-issue_date']
+    paginate_by = 5
+
+    def get_queryset(self):
+        company = get_object_or_404(Company, id=self.kwargs.get('company_id'))
+        return Ticket.objects.filter(payment__company=company).order_by('-issue_date')
+
+
+class AllTicketsListView(LoginRequiredMixin, ListView):
+    model = Ticket
+    template_name = 'payments/tickets.html'
+    context_object_name = 'tickets'
+    ordering = ['-issue_date']
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Ticket.objects.order_by('-issue_date')
+
+
+def export_payments(request):
+    resource = PaymentResource()
+    dataset = resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="payments.csv"'
+    return response
+
+
+def export_tickets(request):
+    resource = TicketResource()
+    dataset = resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="tickets.csv"'
+    return response

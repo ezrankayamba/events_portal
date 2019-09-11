@@ -1,7 +1,13 @@
 {% extends "base/base.html" %}
 {% block content %}
-    <h5>List of Comapanies</h5>
-    <a href="{% url 'company-create' %}" class="btn btn-primary btn-sm mb-2">Add new company</a>
+    <div class="mb-2 btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group" role="group" aria-label="First group">
+          <h5>List of Comapanies</h5>
+        </div>
+        <div class="button-group">
+          <a href="{% url 'company-create' %}" class="btn btn-primary btn-sm">Add new company</a>
+        </div>
+    </div>
     {% if companies %}
         <table class="table table-bordered table-sm table-striped table-hover">
             <thead>

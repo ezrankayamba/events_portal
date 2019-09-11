@@ -132,7 +132,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'payments-home'
+LOGIN_REDIRECT_URL = 'base-home'
 
 LOGIN_URL = 'login'
 

@@ -31,13 +31,17 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %}
-                {% if user.companyuser %}
+                {% if user.companyuser and not user.profile.role.is_internal %}
+                  {% if user.profile.role.name == 'Company Admin' %}
                   <a class="nav-item nav-link" href="{% url 'company-detail' user.companyuser.company.id %}">My Company</a>
                   <a class="nav-item nav-link" href="{% url 'company-payments' user.companyuser.company.id %}">My Payments</a>
-                  <a class="nav-item nav-link" href="{% url 'company-tickets' user.companyuser.company.id %}">Tickets</a>
+                  <a class="nav-item nav-link" href="{% url 'company-tickets' user.companyuser.company.id %}">Company Tickets</a>
+                  {% endif %}
+                  <a class="nav-item nav-link" href="{% url 'user-ticketing' user.companyuser.company.id %}">Ticketing</a>
                 {% else %}
                   <a class="nav-item nav-link" href="{% url 'companies-home' %}">All Companies</a>
                   <a class="nav-item nav-link" href="{% url 'payments-home' %}">All Payments</a>
+                  <a class="nav-item nav-link" href="{% url 'all-tickets' %}">All Tickets</a>
                 {% endif %}
               {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>

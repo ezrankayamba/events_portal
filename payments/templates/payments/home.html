@@ -1,7 +1,14 @@
 {% extends "base/base.html" %}
 {% load humanize %}
 {% block content %}
-    <h5>List of Payments</h5>
+    <div class="mb-2 btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group" role="group" aria-label="First group">
+          <h5>List of Payments</h5>
+        </div>
+        <div class="button-group">
+          <a href="{% url 'export-payments' %}" class="btn btn-sm btn-outline-primary"><span class="mr-2 oi oi-spreadsheet"></span> Export</a>
+        </div>
+    </div>
     {% if payments %}
         <table class="small table table-bordered table-sm table-striped table-hover">
             <thead>

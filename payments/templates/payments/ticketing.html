@@ -2,14 +2,19 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 {% block content %}
-    <div class="mb-2 btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group" role="group" aria-label="First group">
-          <h5>Issued tickets</h5>
-        </div>
-        <div class="button-group">
-          <a href="{% url 'export-tickets' %}" class="btn btn-sm btn-outline-primary"><span class="mr-2 oi oi-spreadsheet"></span> Export</a>
-        </div>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <!-- <legend class="borde-botton mb-1">Payment Details</legend> -->
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group mb-1">
+                <button class="btn btn-outline-info" type="submmit"><span class="oi oi-check"></span> Issue Ticket</button>
+            </div>
+        </form>
     </div>
+    <h5>Issued tickets</h5>
     {% if tickets %}
         <table class="small table table-bordered table-sm table-striped table-hover">
             <thead>

@@ -26,6 +26,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     role = models.ForeignKey(Role, on_delete=models.PROTECT, null=True)
+    # 0 - ticket issuer, 1 - company admin, 2 - internal users, 3 - root user
+    # access_level = models.IntegerField(default=0)
 
     def __str__(self):
         return f'{self.user.username}'
