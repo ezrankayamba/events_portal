@@ -9,4 +9,4 @@ class BaseConfig(AppConfig):
     def ready(self):
         from nots import background
         print(f'The base application is now running')
-        # threading.Thread(target=background.mail_reader_thread).start()
+        threading.Thread(target=background.mail_reader_thread).start()
