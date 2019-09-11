@@ -40,7 +40,7 @@
                         <td scope="row">{{ m.name }}</td>
                         <td>{{ m.price|intcomma }}</td>
                         <td nowrap="nowrap">
-                          <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
+                          <!-- <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a> -->
                           <a href="{% url 'region-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
                         </td>
                       </tr>
@@ -74,7 +74,7 @@
                         <td>{{ m.user.profile.role }}</td>
                         <td>{{ m.user.companyuser.region }}</td>
                         <td nowrap="nowrap">
-                          <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
+                          <!-- <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a> -->
                           <a href="{% url 'company-user-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
                         </td>
                       </tr>
