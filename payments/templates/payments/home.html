@@ -3,7 +3,7 @@
 {% block content %}
     <h3>List of Payments</h3>
     {% if payments %}
-        <table class="table table-bordered table-sm table-striped table-hover">
+        <table class="small table table-bordered table-sm table-striped table-hover">
             <thead>
                 <tr>
                   <th scope="col">Trans ID</th>
@@ -11,6 +11,7 @@
                   <th scope="col">Payer Name</th>
                   <th scope="col">Trans Date</th>
                   <th scope="col">Amount</th>
+                  <th scope="col">Ticket Issued</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                   <td>{{ m.payer_name }}</td>
                   <td>{{ m.trans_date|date:"d/m/y H:i" }}</td>
                   <td>{{ m.amount|intcomma }}</td>
+                  <td>{{ m.ticket_issued }}</td>
                 </tr>
         {% endfor %}
             </tbody>

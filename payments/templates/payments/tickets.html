@@ -1,27 +1,41 @@
 {% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
 {% block content %}
-    <h3>List of Issued Tickets</h3>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <!-- <legend class="borde-botton mb-1">Payment Details</legend> -->
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group mb-1">
+                <button class="btn btn-outline-info" type="submmit"><span class="oi oi-check"></span> Issue Ticket</button>
+            </div>
+        </form>
+    </div>
+    <h5>Issued tickets</h5>
     {% if tickets %}
-        <table class="table table-bordered table-sm table-striped table-hover">
+        <table class="small table table-bordered table-sm table-striped table-hover">
             <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Account</th>
-                  <th scope="col">Email</th>
-                  <th scope="col"></th>
+                  <th scope="col">Trans ID</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Issuer</th>
+                  <th scope="col">Ticket Value</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Ticket Count</th>
                 </tr>
             </thead>
             <tbody>
         {% for m in tickets %}
                 <tr>
-                  <td scope="row">{{ m.name }}</td>
-                  <td>{{ m.account }}</td>
-                  <td>{{ m.email }}</td>
-                  <td>
-                    <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
-                    <a href="{% url 'company-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
-                    <a href="{% url 'company-detail' m.id %}" class="btn btn-sm"><span class="oi oi-cog"></span></a>
-                  </td>
+                  <td scope="row">{{ m.payment.trans_id }}</td>
+                  <td>{{ m.issue_date|date:"d/m/y H:i" }}</td>
+                  <td>{{ m.issuer }}</td>
+                  <td>{{ m.ticket_value|intcomma }}</td>
+                  <td>{{ m.unit_price|intcomma }}</td>
+                  <td>{{ m.ticket_count }}</td>
                 </tr>
         {% endfor %}
             </tbody>

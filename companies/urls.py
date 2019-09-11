@@ -7,7 +7,9 @@ from .views import (
     CompanyUpdateView,
     CompanyDeleteView,
     RegionCreateView,
-    CompanyUserCreateView
+    CompanyUserCreateView,
+    CompanyUserUpdateView,
+    RegionUpdateView
 )
 
 urlpatterns = [
@@ -16,8 +18,8 @@ urlpatterns = [
     path('new/', CompanyCreateView.as_view(), name="company-create"),
     path('<int:pk>/update', CompanyUpdateView.as_view(), name="company-update"),
     path('<int:pk>/delete', CompanyDeleteView.as_view(), name="company-delete"),
-    path('<int:company_id>/regions/new',
-         RegionCreateView.as_view(), name="region-create"),
-    path('<int:company_id>/user/new',
-         CompanyUserCreateView.as_view(), name="company-user-create"),
+    path('<int:company_id>/regions/new', RegionCreateView.as_view(), name="region-create"),
+    path('<int:company_id>/user/new', CompanyUserCreateView.as_view(), name="company-user-create"),
+    path('user/<int:pk>/update', CompanyUserUpdateView.as_view(), name="company-user-update"),
+    path('region/<int:pk>/update', RegionUpdateView.as_view(), name="region-update"),
 ]
