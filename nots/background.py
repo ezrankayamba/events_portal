@@ -48,29 +48,32 @@ def authoring():
 
 
 def parse_mail(msg_text):
-    for regex_line in regex_lines:
-        key, regex = tuple(regex_line.split('='))
-        test = re.findall(regex.strip(), msg_text.strip())
-        match = test[0] if test else None
-        if not match:
-            continue
-        pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_id', 'trans_date', 'balance')
-        if key == 'tigopesa.en':
-            pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_date', 'trans_id', 'balance')
-        if key.startswith('iop.receiving'):
-            pattern = ('prefix', 'balance', 'amount', 'channel', 'payer_account', 'payer_name', 'trans_id', 'receipt_no', 'trans_date')
-        if len(match) == len(pattern):
-            result = dict(zip(pattern, match))
-            result['msg_key'] = key
-            if key.startswith('tigopesa'):
-                result['channel'] = 'Tigo'
-                result['receipt_no'] = 'ON-NET'
-            print(result)
-            author, company = authoring()
-            record_payment(result, author, company)
-            return True
-        else:
-            print(f'No match => {key}|{regex}|{msg_text}')
+    try:
+        for regex_line in regex_lines:
+            key, regex = tuple(regex_line.split('='))
+            test = re.findall(regex.strip(), msg_text.strip())
+            match = test[0] if test else None
+            if not match:
+                continue
+            pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_id', 'trans_date', 'balance')
+            if key == 'tigopesa.en':
+                pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_date', 'trans_id', 'balance')
+            if key.startswith('iop.receiving'):
+                pattern = ('prefix', 'balance', 'amount', 'channel', 'payer_account', 'payer_name', 'trans_id', 'receipt_no', 'trans_date')
+            if len(match) == len(pattern):
+                result = dict(zip(pattern, match))
+                result['msg_key'] = key
+                if key.startswith('tigopesa'):
+                    result['channel'] = 'Tigo'
+                    result['receipt_no'] = 'ON-NET'
+                print(result)
+                author, company = authoring()
+                record_payment(result, author, company)
+                return True
+            else:
+                print(f'No match => {key}|{regex}|{msg_text}')
+    except Exception as e:
+        print('Error:', e)
     print(f'No match for all available regex: {msg_text}')
     return False
 

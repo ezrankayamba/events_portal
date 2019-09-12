@@ -113,6 +113,7 @@ def export_payments(request):
 
 def export_tickets(request):
     resource = TicketResource()
+    # result = Ticket.objects.select_related('payment')
     dataset = resource.export()
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="tickets.csv"'

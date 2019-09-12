@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 import threading
+import os
 
 
 class BaseConfig(AppConfig):
@@ -9,4 +10,11 @@ class BaseConfig(AppConfig):
     def ready(self):
         from nots import background
         print(f'The base application is now running')
-        threading.Thread(target=background.mail_reader_thread).start()
+        run_flag = os.environ.get('RUN_EMAIL_READER', 'ENABLED')
+        print('Raw run: ', run_flag)
+
+        if run_flag == 'ENABLED':
+            print('Email reader enabled')
+            threading.Thread(target=background.mail_reader_thread).start()
+        else:
+            print('Email reader disabled!')
