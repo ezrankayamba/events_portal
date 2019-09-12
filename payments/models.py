@@ -17,6 +17,8 @@ class Payment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, to_field='account', null=True, on_delete=models.SET_NULL)
     ticket_issued = models.BooleanField(default=False)
+    channel = models.CharField(max_length=40, null=True)
+    receipt_no = models.CharField(max_length=40, null=True)
 
     def __str__(self):
         return self.trans_id if self.trans_id else 'None'

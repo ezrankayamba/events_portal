@@ -1,0 +1,18 @@
+[
+   {
+      "id": "tigopesa.en",
+      "message": "You have received TSh 100 from 255713123066 - FATHER NKAYAMBA on 10/09/19 19:45, with TxnId: 10648686924. New balance is TSh 18,393. Thank you for using Tigo Pesa."
+   },
+   {
+      "id": "tigopesa.sw",
+      "message": "Umepokea TSh 120 kutoka kwa 255658123823 - PASCAL CHUWA. Kumbukumbu No.: 41204648012 12/09/19 08:58. Salio lako jipya ni TSh 20,694. Asante kwa kutumia TigoPesa"
+   },
+   {
+      "id": "iop.receiving.en",
+      "message": "Transfer Successful. New balance is TSh 32,681. You have received TSh 1,100 from Vodacom; 255759644474 - RESTITUTA MNUBI with TxnId: 91204642927. 6IC32QIP4HB. 12/09/19 08:59"
+   },
+   {
+      "id": "iop.receiving.sw",
+      "message": "Hamisho la pesa limekamilika. Salio jipya TSh 31,581. Umepokea TSh 1,000 kutoka Vodacom; 255759644474 - RESTITUTA MNUBI, kumbukumbu ya malipo.: 12699137055. 6IC62QIOP1A. 12/09/19 08:56."
+   }
+]

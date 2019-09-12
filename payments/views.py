@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from django.http import HttpResponse
 from .resources import PaymentResource, TicketResource
+from django.db.models import Q
 
 
 class PaymentsListView(LoginRequiredMixin, ListView):
@@ -54,25 +55,28 @@ class UserTicketingFormListView(LoginRequiredMixin, FormView):
         user = self.request.user
         data = form.cleaned_data
         print('Cleaned data: ', data)
-        payment = Payment.objects.filter(payer_account=data['payer_account'], trans_id=data['trans_id']).first()
-        if payment:
-            print('Payment: ', payment.amount)
-            cu = user.companyuser
-            unit_price = cu.region.price
-            count = int(payment.amount / unit_price)
-            balance = payment.amount - (count * unit_price)
-            if payment.ticket_issued:
-                messages.warning(self.request, 'Alert, The ticket(s) for this payment already issued!')
-            elif not count:
-                messages.warning(self.request, 'Fail, not enough amount to purchase a ticket!')
-            else:
-                ticket = Ticket(payment=payment, unit_price=unit_price, ticket_value=payment.amount, ticket_count=count, balance=balance, issuer=cu, region=cu.region)
-                ticket.save()
-                payment.ticket_issued = True
-                payment.save()
-                messages.success(self.request, f'Success, you have successfully issued {count} ticket(s)!')
+        if data['trans_id'].strip() == 'ON-NET':
+            messages.warning(self.request, f'Failed, "ON-NET" is not valid Transaction ID')
         else:
-            messages.warning(self.request, 'Failed, review your inputs and resubmit!')
+            payment = Payment.objects.filter(Q(payer_account=data['payer_account']), Q(trans_id=data['trans_id']) | Q(receipt_no=data['trans_id'])).first()
+            if payment:
+                print('Payment: ', payment.amount)
+                cu = user.companyuser
+                unit_price = cu.region.price
+                count = int(payment.amount / unit_price)
+                balance = payment.amount - (count * unit_price)
+                if payment.ticket_issued:
+                    messages.warning(self.request, 'Alert, The ticket(s) for this payment already issued!')
+                elif not count:
+                    messages.warning(self.request, 'Fail, not enough amount to purchase a ticket!')
+                else:
+                    ticket = Ticket(payment=payment, unit_price=unit_price, ticket_value=payment.amount, ticket_count=count, balance=balance, issuer=cu, region=cu.region)
+                    ticket.save()
+                    payment.ticket_issued = True
+                    payment.save()
+                    messages.success(self.request, f'Success, you have successfully issued {count} ticket(s)!')
+            else:
+                messages.warning(self.request, 'Failed, review your inputs and resubmit!')
         return super().form_valid(form)
 
 

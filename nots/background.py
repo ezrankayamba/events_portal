@@ -11,6 +11,7 @@ import time
 import re
 import base64
 import datetime
+import json
 
 LABEL_SUCCESS = 'ReadMails/IOP1002/Success'
 LABEL_FAIL = 'ReadMails/IOP1002/Fail'
@@ -31,7 +32,9 @@ def record_payment(params, author, company):
                           amount=params['amount'].replace(',', ''),
                           trans_date=datetime.datetime.strptime(params['trans_date'], '%d/%m/%y %H:%M'),
                           author=author,
-                          company=company)
+                          company=company,
+                          channel=params['channel'],
+                          receipt_no=params['receipt_no'])
         payment.save()
     except Exception as e:
         print(e)
@@ -49,18 +52,26 @@ def parse_mail(msg_text):
         key, regex = tuple(regex_line.split('='))
         test = re.findall(regex.strip(), msg_text.strip())
         match = test[0] if test else None
-        pattern = ('type', 'amount', 'payer_account', 'payer_name', 'trans_id', 'trans_date', 'balance')
+        if not match:
+            continue
+        pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_id', 'trans_date', 'balance')
         if key == 'tigopesa.en':
-            pattern = ('type', 'amount', 'payer_account', 'payer_name', 'trans_date', 'trans_id', 'balance')
-        if match and len(match) == len(pattern):
+            pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_date', 'trans_id', 'balance')
+        if key.startswith('iop.receiving'):
+            pattern = ('prefix', 'balance', 'amount', 'channel', 'payer_account', 'payer_name', 'trans_id', 'receipt_no', 'trans_date')
+        if len(match) == len(pattern):
             result = dict(zip(pattern, match))
-            result['category'] = key
+            result['msg_key'] = key
+            if key.startswith('tigopesa'):
+                result['channel'] = 'Tigo'
+                result['receipt_no'] = 'ON-NET'
             print(result)
             author, company = authoring()
             record_payment(result, author, company)
             return True
         else:
             print(f'No match => {key}|{regex}|{msg_text}')
+    print(f'No match for all available regex: {msg_text}')
     return False
 
 
@@ -87,7 +98,7 @@ def mail_reader_thread():
     while True:
         print('Reading mail...')
         # results = service.users().messages().list(userId='me', labelIds=['INBOX'], q='is:unread').execute()
-        results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
+        results = service.users().messages().list(userId='me', labelIds=['INBOX'], q='from:Tigo.Pesa@tigo.co.tz').execute()
         messages = results.get('messages', [])
         for message in messages:
             msg = service.users().messages().get(userId='me', id=message['id']).execute()
@@ -133,3 +144,12 @@ def my_labels(service):
                 res['fail'] = x['id']
         return res
     return None
+
+
+def test_messages():
+    with open('sample_messages.json') as fp:
+        messages = json.load(fp)
+        for msg in messages:
+            # print('\n', msg['id'])
+            # print(msg['message'])
+            parse_mail(msg['message'])

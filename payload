@@ -1,1 +1,215 @@
-{"partId": "", "mimeType": "text/plain", "filename": "", "headers": [{"name": "Delivered-To", "value": "nezatech.notification@gmail.com"}, {"name": "Received", "value": "by 2002:a67:f282:0:0:0:0:0 with SMTP id m2csp6119538vsk;        Tue, 10 Sep 2019 08:36:03 -0700 (PDT)"}, {"name": "X-Received", "value": "by 2002:a17:906:aad2:: with SMTP id kt18mr25335620ejb.201.1568129522403;        Tue, 10 Sep 2019 08:32:02 -0700 (PDT)"}, {"name": "X-Google-Smtp-Source", "value": "APXvYqywPlAhwd8dRGoejlzIbALnrHILHNwcktH1R8vyrqI9SFXmEaF6/+F3bTBOGfsUidgS2HAZ"}, {"name": "X-Received", "value": "by 2002:a17:906:aad2:: with SMTP id kt18mr25335523ejb.201.1568129521351;        Tue, 10 Sep 2019 08:32:01 -0700 (PDT)"}, {"name": "ARC-Seal", "value": "i=2; a=rsa-sha256; t=1568129521; cv=pass;        d=google.com; s=arc-20160816;        b=Y9mBBuuyaSQn/6Xh0SSAXNd2HcRcpK+f+d+RRaQ28b9LKyZwuuT8f3kWDJ4L7c+PwW         XaxGMQaFOVqzJmiSrWmkPiXofM+b/AhFZ+S0lVCcoysBt865TPWJEpgaW7Vq/4mivf9g         i3MlkkagdhkKK+kY0RuorfMAx8MB7E7lntt2kzSE3fjmRq9Hf7vPsg6EsF+ftVr4G+7t         5qcgBL2Q1rc2CD0IQSEp/EJ8oZBOrMEwk+Gb6rMNehIOY9qKdAOizQN+UejUbYoymbbx         moXp2P7waNkg6vMmYbyVvt2QOf74ztI1zTLbw5b4SN7NjwoDMQj7/BOXlUcelezdZwAa         55cw=="}, {"name": "ARC-Message-Signature", "value": "i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;        h=content-transfer-encoding:mime-version:subject:message-id:to:from         :date:dkim-signature;        bh=Oi/uRIWhDYBPFurhnotI3nZBi4nvd+6QCMn7l8RhJV0=;        b=W2d1mjHOD81Wd3P5HZJQeJh8xXQN988rgZ1hBBJh4ym8oO1jEX95+QaHpGL1GCrRsY         VgHUlCA3dZ6fxVuXcpcqG1QmLarEFAcaL+sgd6UVGfRql7HiEyluSXXhlxwdiBFlfhug         8fMb21qur0ViGB8Jdu+AfW5aBpoAy+pM2RLSWSfmplqyK9/n84RvgNahqmhCKEJrTYAB         ImCaR/7CsXymiBqmmCKR9LolqavNzoZft5BRtAMu58K+67wowVLd7kKkuCpFTgsOjlpK         bUJm17IEu+RpSU7ToRFiVO/E5v4Ookvj1mVLa7fqmPrlcCuJpKPqGLrGTWgBYR22D/pN         Az5w=="}, {"name": "ARC-Authentication-Results", "value": "i=2; mx.google.com;       dkim=pass header.i=@millicom.onmicrosoft.com header.s=selector2-millicom-onmicrosoft-com header.b=aB3G3ekT;       arc=pass (i=1 spf=pass spfdomain=tigo.co.tz dmarc=pass fromdomain=tigo.co.tz);       spf=pass (google.com: domain of tigo.pesa@tigo.co.tz designates 2a01:111:f400:fe0e::723 as permitted sender) smtp.mailfrom=Tigo.Pesa@tigo.co.tz;       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=tigo.co.tz"}, {"name": "Return-Path", "value": "<Tigo.Pesa@tigo.co.tz>"}, {"name": "Received", "value": "from EUR04-VI1-obe.outbound.protection.outlook.com (mail-vi1eur04on0723.outbound.protection.outlook.com. [2a01:111:f400:fe0e::723])        by mx.google.com with ESMTPS id i19si9679733ejz.364.2019.09.10.08.32.01        for <nezatech.notification@gmail.com>        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);        Tue, 10 Sep 2019 08:32:01 -0700 (PDT)"}, {"name": "Received-SPF", "value": "pass (google.com: domain of tigo.pesa@tigo.co.tz designates 2a01:111:f400:fe0e::723 as permitted sender) client-ip=2a01:111:f400:fe0e::723;"}, {"name": "Authentication-Results", "value": "mx.google.com;       dkim=pass header.i=@millicom.onmicrosoft.com header.s=selector2-millicom-onmicrosoft-com header.b=aB3G3ekT;       arc=pass (i=1 spf=pass spfdomain=tigo.co.tz dmarc=pass fromdomain=tigo.co.tz);       spf=pass (google.com: domain of tigo.pesa@tigo.co.tz designates 2a01:111:f400:fe0e::723 as permitted sender) smtp.mailfrom=Tigo.Pesa@tigo.co.tz;       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=tigo.co.tz"}, {"name": "ARC-Seal", "value": "i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none; b=HRILdWHr+8a3nDBoliMftzo/MrZPvCGkzNX5Cb8PScW35hOCY7MCpqpUWL2wPjVp271aXBoI3/8tS8GGvQ4QlLMoItfb5ycjOOxqG/4XNM+g1sdV99OUXpS/ZWOvZUMZy6Kr6vDWYcSGq0uZ8A5OC7kPPc3YkRJ4j0Vt9X8YuumXeuPQ5WAvgRAyDLNju1rC18VxIb5bJj+9YqbcMcPGn3yj8YmYMqNR8FY4EsaptQsZWYhMGf8HKrLpNhDGmDbIgM7nceReSXD6NZ72SuplbN+zJeEfEmRVsTMoyYBesLUiexS6/Px0D4f0N3XtmrV9O3gwvMXc8Ep9edqZLJ/XuQ=="}, {"name": "ARC-Message-Signature", "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck; bh=Oi/uRIWhDYBPFurhnotI3nZBi4nvd+6QCMn7l8RhJV0=; b=ONnx6K+ncOBFRMOzopu+QhH7CMmFKFnECXlIrpaHlz6YZyyeZRMSgRkOoQhC0RfJoWWc8Cd8H1wvw20Pjssozy88t4i6d0zu1QLqdNulvrJhGDrB1sr6lOfEMEqYjTMDRQv4b5rAGix++TzMjnU97BY0w1X0jztqP+MT8R+TJi1OWp0roLHdXdAew0BgU4h1XPVCgyRU1FzIjPCGykaUaG9qhrTN6buyM5LCx4hgmpuinWW78+yLIinn1i8FoiJWPergdkDLiWYvbiCmddieND3VCA/BVVsXJUiZPQ0ovKegxR6JkM1vHAfyf/+w3UJAOmYJmihvgALfXQ5UOom64w=="}, {"name": "ARC-Authentication-Results", "value": "i=1; mx.microsoft.com 1; spf=pass (sender ip is 41.222.176.202) smtp.rcpttodomain=gmail.com smtp.mailfrom=tigo.co.tz; dmarc=pass (p=none sp=none pct=20) action=none header.from=tigo.co.tz; dkim=none (message not signed); arc=none"}, {"name": "DKIM-Signature", "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=millicom.onmicrosoft.com; s=selector2-millicom-onmicrosoft-com; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck; bh=Oi/uRIWhDYBPFurhnotI3nZBi4nvd+6QCMn7l8RhJV0=; b=aB3G3ekTMMF2kFGg437/j4GpqUkbq1u9wB3qMkZO7MZn0W3rIfhj5GazU2w0PARysyHSBfrIe4wQ1bfsNav0+z5WWsrrv0hMFF5Jvz3PdRXHVXLUvd/h2mQtMlzx1lOXwSSohXGoEZW38Wiy4g8RVQteUWmHU/R9yds0v+G7TVQ="}, {"name": "Received", "value": "from HE1PR0901CA0066.eurprd09.prod.outlook.com (2603:10a6:3:45::34) by AM4PR0902MB1889.eurprd09.prod.outlook.com (2603:10a6:200:94::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2241.18; Tue, 10 Sep 2019 15:32:00 +0000"}, {"name": "Received", "value": "from DB5EUR03FT034.eop-EUR03.prod.protection.outlook.com (2a01:111:f400:7e0a::209) by HE1PR0901CA0066.outlook.office365.com (2603:10a6:3:45::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2263.13 via Frontend Transport; Tue, 10 Sep 2019 15:32:00 +0000"}, {"name": "Authentication-Results", "value": "spf=pass (sender IP is 41.222.176.202) smtp.mailfrom=tigo.co.tz; gmail.com; dkim=none (message not signed) header.d=none;gmail.com; dmarc=pass action=none header.from=tigo.co.tz;"}, {"name": "Received-SPF", "value": "Pass (protection.outlook.com: domain of tigo.co.tz designates 41.222.176.202 as permitted sender) receiver=protection.outlook.com; client-ip=41.222.176.202; helo=mailbox01.tigo.co.tz;"}, {"name": "Received", "value": "from mailbox01.tigo.co.tz (41.222.176.202) by DB5EUR03FT034.mail.protection.outlook.com (10.152.20.87) with Microsoft SMTP Server (version=TLS1_0, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA) id 15.20.2241.14 via Frontend Transport; Tue, 10 Sep 2019 15:31:59 +0000"}, {"name": "Received", "value": "from tzstt01a (10.99.1.161) by MAILBOX01.tigo.co.tz (10.222.10.60) with Microsoft SMTP Server id 14.3.389.1; Tue, 10 Sep 2019 18:31:57 +0300"}, {"name": "Date", "value": "Tue, 10 Sep 2019 18:31:57 +0300"}, {"name": "From", "value": "\"Tigo.Pesa@tigo.co.tz\" <Tigo.Pesa@tigo.co.tz>"}, {"name": "To", "value": "\"nezatech.notification@gmail.com\" <nezatech.notification@gmail.com>"}, {"name": "Message-ID", "value": "<1317678637.65.1568129517063.JavaMail.telepin@tzstt01a>"}, {"name": "Subject", "value": "SendMoney Success 11217427"}, {"name": "MIME-Version", "value": "1.0"}, {"name": "Content-Type", "value": "text/plain; charset=\"us-ascii\""}, {"name": "Content-Transfer-Encoding", "value": "quoted-printable"}, {"name": "Return-Path", "value": "Tigo.Pesa@tigo.co.tz"}, {"name": "X-EOPAttributedMessage", "value": "0"}, {"name": "X-MS-Office365-Filtering-HT", "value": "Tenant"}, {"name": "X-Forefront-Antispam-Report", "value": "CIP:41.222.176.202;IPV:NLI;CTRY:TZ;EFV:NLI;SFV:NSPM;SFS:(10019020)(4636009)(376002)(39860400002)(396003)(136003)(346002)(3000300001)(189003)(199004)(316002)(8936002)(1361003)(86816001)(7636002)(336012)(86362001)(9576002)(5640700003)(97756001)(9686003)(5001810100001)(6306002)(55016002)(33716001)(426003)(6916009)(10646004)(4744005)(7116003)(8746002)(126002)(5660300002)(476003)(2351001)(70206006)(356004)(8676002)(2906002)(486006)(23726003)(106002)(47776003)(246002)(2501003)(305945005)(478600001)(186003)(70586007)(46406003)(7596002)(26005)(50466002)(966005);DIR:OUT;SFP:1102;SCL:1;SRVR:AM4PR0902MB1889;H:mailbox01.tigo.co.tz;FPR:;SPF:Pass;LANG:en;PTR:mailbox01.tigo.co.tz;MX:1;A:1;"}, {"name": "X-MS-PublicTrafficType", "value": "Email"}, {"name": "X-MS-Office365-Filtering-Correlation-Id", "value": "81c6f32d-89a7-4059-e4d9-08d7360405cb"}, {"name": "X-Microsoft-Antispam", "value": "BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(4709080)(1401327)(4618075)(2017052603328);SRVR:AM4PR0902MB1889;"}, {"name": "X-MS-TrafficTypeDiagnostic", "value": "AM4PR0902MB1889:"}, {"name": "X-MS-Exchange-PUrlCount", "value": "1"}, {"name": "X-Microsoft-Antispam-PRVS", "value": "<AM4PR0902MB188906DCBFC08913C90CDF73D1B60@AM4PR0902MB1889.eurprd09.prod.outlook.com>"}, {"name": "X-MS-Oob-TLC-OOBClassifiers", "value": "OLM:4125;"}, {"name": "X-Forefront-PRVS", "value": "01565FED4C"}, {"name": "X-MS-Exchange-SenderADCheck", "value": "1"}, {"name": "X-Microsoft-Antispam-Message-Info", "value": "S/1ti1svNCF9qzdb4xr8hkM/MyNmmYj/NIEVuQioZMF7Cp2R+lC6Hhr3hO1fOfJSJVRFffkJJGjVQlh2yP2JIA4kgQ/bRLEr5+dT/7VBHMJrb0r7J+lWvL742OVtjRUz1nyv0t9I/d7FaUUk6ujMEV6/fHzSoMcZe38mZKnvLK/Y4f0Ka6DR1mzaBNxVtqAhpghKNaYX82V4HyOlUyn1p2FcsnG/jFtQQC1x966dk6WB5MAa0QCTU6WKR1rmdp8zGNTJEEpgBSCHlQwaCffKzlX3i+LLAhFEzXJ/a/OdBNu4l5lxeAY67WWJLE1YQsdPT5HcesiEmWoysiu/dd59xBbuFNNhrPQLBKc2DRzPTppbBe4lqQNN7FiUysv0u1sxvfje387VJwFa7dudLt7BTze4tNFF6gpTvTxBZubZSDY="}, {"name": "X-OriginatorOrg", "value": "tigo.co.tz"}, {"name": "X-MS-Exchange-CrossTenant-OriginalArrivalTime", "value": "10 Sep 2019 15:31:59.4726 (UTC)"}, {"name": "X-MS-Exchange-CrossTenant-Network-Message-Id", "value": "81c6f32d-89a7-4059-e4d9-08d7360405cb"}, {"name": "X-MS-Exchange-CrossTenant-Id", "value": "650039fd-712a-4fe1-b863-86103c425c17"}, {"name": "X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp", "value": "TenantId=650039fd-712a-4fe1-b863-86103c425c17;Ip=[41.222.176.202];Helo=[mailbox01.tigo.co.tz]"}, {"name": "X-MS-Exchange-CrossTenant-FromEntityHeader", "value": "HybridOnPrem"}, {"name": "X-MS-Exchange-Transport-CrossTenantHeadersStamped", "value": "AM4PR0902MB1889"}], "body": {"size": 352, "data": "U2FsaW8gbGFrbyBqaXB5YSBuaSBUU2ggMjMsOTk3LiBVbWVwb2tlYSBUU2ggMTAwIGt1dG9rYSBrd2EgMjU1NzEzMTIzMDY2IC0gRkFUSEVSIEUuIE5LQVlBTUJBLCBrdW1idWt1bWJ1IG5vLlBQLjE5MDkxMC4xODMxLk40OTYyNTU5MDcuIDEwLzA5LzE5IDE4OjMxLg0KW1RpZ28gVGFuemFuaWFdDQpGdWxsIGRldGFpbHMgb2YgTWlsbGljb20gYW5kIG91ciBkaXNjbGFpbWVyIHNob3VsZCBiZSBpbnNwZWN0ZWQgYXQgaHR0cDovL3d3dy5taWxsaWNvbS5jb20vZW1haWxfZGlzY2xhaW1lci5jZm0gVGhpcyBlbWFpbCBzaG91bGQgYmUgcmVhZCBzb2xlbHkgaW4gY29uanVuY3Rpb24gd2l0aCBvdXIgZGlzY2xhaW1lci4NCg=="}}
+{
+   "partId": "",
+   "mimeType": "text/plain",
+   "filename": "",
+   "headers": [
+      {
+         "name": "Delivered-To",
+         "value": "nezatech.notification@gmail.com"
+      },
+      {
+         "name": "Received",
+         "value": "by 2002:a67:f282:0:0:0:0:0 with SMTP id m2csp6119538vsk;        Tue, 10 Sep 2019 08:36:03 -0700 (PDT)"
+      },
+      {
+         "name": "X-Received",
+         "value": "by 2002:a17:906:aad2:: with SMTP id kt18mr25335620ejb.201.1568129522403;        Tue, 10 Sep 2019 08:32:02 -0700 (PDT)"
+      },
+      {
+         "name": "X-Google-Smtp-Source",
+         "value": "APXvYqywPlAhwd8dRGoejlzIbALnrHILHNwcktH1R8vyrqI9SFXmEaF6/+F3bTBOGfsUidgS2HAZ"
+      },
+      {
+         "name": "X-Received",
+         "value": "by 2002:a17:906:aad2:: with SMTP id kt18mr25335523ejb.201.1568129521351;        Tue, 10 Sep 2019 08:32:01 -0700 (PDT)"
+      },
+      {
+         "name": "ARC-Seal",
+         "value": "i=2; a=rsa-sha256; t=1568129521; cv=pass;        d=google.com; s=arc-20160816;        b=Y9mBBuuyaSQn/6Xh0SSAXNd2HcRcpK+f+d+RRaQ28b9LKyZwuuT8f3kWDJ4L7c+PwW         XaxGMQaFOVqzJmiSrWmkPiXofM+b/AhFZ+S0lVCcoysBt865TPWJEpgaW7Vq/4mivf9g         i3MlkkagdhkKK+kY0RuorfMAx8MB7E7lntt2kzSE3fjmRq9Hf7vPsg6EsF+ftVr4G+7t         5qcgBL2Q1rc2CD0IQSEp/EJ8oZBOrMEwk+Gb6rMNehIOY9qKdAOizQN+UejUbYoymbbx         moXp2P7waNkg6vMmYbyVvt2QOf74ztI1zTLbw5b4SN7NjwoDMQj7/BOXlUcelezdZwAa         55cw=="
+      },
+      {
+         "name": "ARC-Message-Signature",
+         "value": "i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;        h=content-transfer-encoding:mime-version:subject:message-id:to:from         :date:dkim-signature;        bh=Oi/uRIWhDYBPFurhnotI3nZBi4nvd+6QCMn7l8RhJV0=;        b=W2d1mjHOD81Wd3P5HZJQeJh8xXQN988rgZ1hBBJh4ym8oO1jEX95+QaHpGL1GCrRsY         VgHUlCA3dZ6fxVuXcpcqG1QmLarEFAcaL+sgd6UVGfRql7HiEyluSXXhlxwdiBFlfhug         8fMb21qur0ViGB8Jdu+AfW5aBpoAy+pM2RLSWSfmplqyK9/n84RvgNahqmhCKEJrTYAB         ImCaR/7CsXymiBqmmCKR9LolqavNzoZft5BRtAMu58K+67wowVLd7kKkuCpFTgsOjlpK         bUJm17IEu+RpSU7ToRFiVO/E5v4Ookvj1mVLa7fqmPrlcCuJpKPqGLrGTWgBYR22D/pN         Az5w=="
+      },
+      {
+         "name": "ARC-Authentication-Results",
+         "value": "i=2; mx.google.com;       dkim=pass header.i=@millicom.onmicrosoft.com header.s=selector2-millicom-onmicrosoft-com header.b=aB3G3ekT;       arc=pass (i=1 spf=pass spfdomain=tigo.co.tz dmarc=pass fromdomain=tigo.co.tz);       spf=pass (google.com: domain of tigo.pesa@tigo.co.tz designates 2a01:111:f400:fe0e::723 as permitted sender) smtp.mailfrom=Tigo.Pesa@tigo.co.tz;       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=tigo.co.tz"
+      },
+      {
+         "name": "Return-Path",
+         "value": "<Tigo.Pesa@tigo.co.tz>"
+      },
+      {
+         "name": "Received",
+         "value": "from EUR04-VI1-obe.outbound.protection.outlook.com (mail-vi1eur04on0723.outbound.protection.outlook.com. [2a01:111:f400:fe0e::723])        by mx.google.com with ESMTPS id i19si9679733ejz.364.2019.09.10.08.32.01        for <nezatech.notification@gmail.com>        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);        Tue, 10 Sep 2019 08:32:01 -0700 (PDT)"
+      },
+      {
+         "name": "Received-SPF",
+         "value": "pass (google.com: domain of tigo.pesa@tigo.co.tz designates 2a01:111:f400:fe0e::723 as permitted sender) client-ip=2a01:111:f400:fe0e::723;"
+      },
+      {
+         "name": "Authentication-Results",
+         "value": "mx.google.com;       dkim=pass header.i=@millicom.onmicrosoft.com header.s=selector2-millicom-onmicrosoft-com header.b=aB3G3ekT;       arc=pass (i=1 spf=pass spfdomain=tigo.co.tz dmarc=pass fromdomain=tigo.co.tz);       spf=pass (google.com: domain of tigo.pesa@tigo.co.tz designates 2a01:111:f400:fe0e::723 as permitted sender) smtp.mailfrom=Tigo.Pesa@tigo.co.tz;       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=tigo.co.tz"
+      },
+      {
+         "name": "ARC-Seal",
+         "value": "i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none; b=HRILdWHr+8a3nDBoliMftzo/MrZPvCGkzNX5Cb8PScW35hOCY7MCpqpUWL2wPjVp271aXBoI3/8tS8GGvQ4QlLMoItfb5ycjOOxqG/4XNM+g1sdV99OUXpS/ZWOvZUMZy6Kr6vDWYcSGq0uZ8A5OC7kPPc3YkRJ4j0Vt9X8YuumXeuPQ5WAvgRAyDLNju1rC18VxIb5bJj+9YqbcMcPGn3yj8YmYMqNR8FY4EsaptQsZWYhMGf8HKrLpNhDGmDbIgM7nceReSXD6NZ72SuplbN+zJeEfEmRVsTMoyYBesLUiexS6/Px0D4f0N3XtmrV9O3gwvMXc8Ep9edqZLJ/XuQ=="
+      },
+      {
+         "name": "ARC-Message-Signature",
+         "value": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck; bh=Oi/uRIWhDYBPFurhnotI3nZBi4nvd+6QCMn7l8RhJV0=; b=ONnx6K+ncOBFRMOzopu+QhH7CMmFKFnECXlIrpaHlz6YZyyeZRMSgRkOoQhC0RfJoWWc8Cd8H1wvw20Pjssozy88t4i6d0zu1QLqdNulvrJhGDrB1sr6lOfEMEqYjTMDRQv4b5rAGix++TzMjnU97BY0w1X0jztqP+MT8R+TJi1OWp0roLHdXdAew0BgU4h1XPVCgyRU1FzIjPCGykaUaG9qhrTN6buyM5LCx4hgmpuinWW78+yLIinn1i8FoiJWPergdkDLiWYvbiCmddieND3VCA/BVVsXJUiZPQ0ovKegxR6JkM1vHAfyf/+w3UJAOmYJmihvgALfXQ5UOom64w=="
+      },
+      {
+         "name": "ARC-Authentication-Results",
+         "value": "i=1; mx.microsoft.com 1; spf=pass (sender ip is 41.222.176.202) smtp.rcpttodomain=gmail.com smtp.mailfrom=tigo.co.tz; dmarc=pass (p=none sp=none pct=20) action=none header.from=tigo.co.tz; dkim=none (message not signed); arc=none"
+      },
+      {
+         "name": "DKIM-Signature",
+         "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=millicom.onmicrosoft.com; s=selector2-millicom-onmicrosoft-com; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck; bh=Oi/uRIWhDYBPFurhnotI3nZBi4nvd+6QCMn7l8RhJV0=; b=aB3G3ekTMMF2kFGg437/j4GpqUkbq1u9wB3qMkZO7MZn0W3rIfhj5GazU2w0PARysyHSBfrIe4wQ1bfsNav0+z5WWsrrv0hMFF5Jvz3PdRXHVXLUvd/h2mQtMlzx1lOXwSSohXGoEZW38Wiy4g8RVQteUWmHU/R9yds0v+G7TVQ="
+      },
+      {
+         "name": "Received",
+         "value": "from HE1PR0901CA0066.eurprd09.prod.outlook.com (2603:10a6:3:45::34) by AM4PR0902MB1889.eurprd09.prod.outlook.com (2603:10a6:200:94::22) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2241.18; Tue, 10 Sep 2019 15:32:00 +0000"
+      },
+      {
+         "name": "Received",
+         "value": "from DB5EUR03FT034.eop-EUR03.prod.protection.outlook.com (2a01:111:f400:7e0a::209) by HE1PR0901CA0066.outlook.office365.com (2603:10a6:3:45::34) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2263.13 via Frontend Transport; Tue, 10 Sep 2019 15:32:00 +0000"
+      },
+      {
+         "name": "Authentication-Results",
+         "value": "spf=pass (sender IP is 41.222.176.202) smtp.mailfrom=tigo.co.tz; gmail.com; dkim=none (message not signed) header.d=none;gmail.com; dmarc=pass action=none header.from=tigo.co.tz;"
+      },
+      {
+         "name": "Received-SPF",
+         "value": "Pass (protection.outlook.com: domain of tigo.co.tz designates 41.222.176.202 as permitted sender) receiver=protection.outlook.com; client-ip=41.222.176.202; helo=mailbox01.tigo.co.tz;"
+      },
+      {
+         "name": "Received",
+         "value": "from mailbox01.tigo.co.tz (41.222.176.202) by DB5EUR03FT034.mail.protection.outlook.com (10.152.20.87) with Microsoft SMTP Server (version=TLS1_0, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA) id 15.20.2241.14 via Frontend Transport; Tue, 10 Sep 2019 15:31:59 +0000"
+      },
+      {
+         "name": "Received",
+         "value": "from tzstt01a (10.99.1.161) by MAILBOX01.tigo.co.tz (10.222.10.60) with Microsoft SMTP Server id 14.3.389.1; Tue, 10 Sep 2019 18:31:57 +0300"
+      },
+      {
+         "name": "Date",
+         "value": "Tue, 10 Sep 2019 18:31:57 +0300"
+      },
+      {
+         "name": "From",
+         "value": "\"Tigo.Pesa@tigo.co.tz\" <Tigo.Pesa@tigo.co.tz>"
+      },
+      {
+         "name": "To",
+         "value": "\"nezatech.notification@gmail.com\" <nezatech.notification@gmail.com>"
+      },
+      {
+         "name": "Message-ID",
+         "value": "<1317678637.65.1568129517063.JavaMail.telepin@tzstt01a>"
+      },
+      {
+         "name": "Subject",
+         "value": "SendMoney Success 11217427"
+      },
+      {
+         "name": "MIME-Version",
+         "value": "1.0"
+      },
+      {
+         "name": "Content-Type",
+         "value": "text/plain; charset=\"us-ascii\""
+      },
+      {
+         "name": "Content-Transfer-Encoding",
+         "value": "quoted-printable"
+      },
+      {
+         "name": "Return-Path",
+         "value": "Tigo.Pesa@tigo.co.tz"
+      },
+      {
+         "name": "X-EOPAttributedMessage",
+         "value": "0"
+      },
+      {
+         "name": "X-MS-Office365-Filtering-HT",
+         "value": "Tenant"
+      },
+      {
+         "name": "X-Forefront-Antispam-Report",
+         "value": "CIP:41.222.176.202;IPV:NLI;CTRY:TZ;EFV:NLI;SFV:NSPM;SFS:(10019020)(4636009)(376002)(39860400002)(396003)(136003)(346002)(3000300001)(189003)(199004)(316002)(8936002)(1361003)(86816001)(7636002)(336012)(86362001)(9576002)(5640700003)(97756001)(9686003)(5001810100001)(6306002)(55016002)(33716001)(426003)(6916009)(10646004)(4744005)(7116003)(8746002)(126002)(5660300002)(476003)(2351001)(70206006)(356004)(8676002)(2906002)(486006)(23726003)(106002)(47776003)(246002)(2501003)(305945005)(478600001)(186003)(70586007)(46406003)(7596002)(26005)(50466002)(966005);DIR:OUT;SFP:1102;SCL:1;SRVR:AM4PR0902MB1889;H:mailbox01.tigo.co.tz;FPR:;SPF:Pass;LANG:en;PTR:mailbox01.tigo.co.tz;MX:1;A:1;"
+      },
+      {
+         "name": "X-MS-PublicTrafficType",
+         "value": "Email"
+      },
+      {
+         "name": "X-MS-Office365-Filtering-Correlation-Id",
+         "value": "81c6f32d-89a7-4059-e4d9-08d7360405cb"
+      },
+      {
+         "name": "X-Microsoft-Antispam",
+         "value": "BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(4709080)(1401327)(4618075)(2017052603328);SRVR:AM4PR0902MB1889;"
+      },
+      {
+         "name": "X-MS-TrafficTypeDiagnostic",
+         "value": "AM4PR0902MB1889:"
+      },
+      {
+         "name": "X-MS-Exchange-PUrlCount",
+         "value": "1"
+      },
+      {
+         "name": "X-Microsoft-Antispam-PRVS",
+         "value": "<AM4PR0902MB188906DCBFC08913C90CDF73D1B60@AM4PR0902MB1889.eurprd09.prod.outlook.com>"
+      },
+      {
+         "name": "X-MS-Oob-TLC-OOBClassifiers",
+         "value": "OLM:4125;"
+      },
+      {
+         "name": "X-Forefront-PRVS",
+         "value": "01565FED4C"
+      },
+      {
+         "name": "X-MS-Exchange-SenderADCheck",
+         "value": "1"
+      },
+      {
+         "name": "X-Microsoft-Antispam-Message-Info",
+         "value": "S/1ti1svNCF9qzdb4xr8hkM/MyNmmYj/NIEVuQioZMF7Cp2R+lC6Hhr3hO1fOfJSJVRFffkJJGjVQlh2yP2JIA4kgQ/bRLEr5+dT/7VBHMJrb0r7J+lWvL742OVtjRUz1nyv0t9I/d7FaUUk6ujMEV6/fHzSoMcZe38mZKnvLK/Y4f0Ka6DR1mzaBNxVtqAhpghKNaYX82V4HyOlUyn1p2FcsnG/jFtQQC1x966dk6WB5MAa0QCTU6WKR1rmdp8zGNTJEEpgBSCHlQwaCffKzlX3i+LLAhFEzXJ/a/OdBNu4l5lxeAY67WWJLE1YQsdPT5HcesiEmWoysiu/dd59xBbuFNNhrPQLBKc2DRzPTppbBe4lqQNN7FiUysv0u1sxvfje387VJwFa7dudLt7BTze4tNFF6gpTvTxBZubZSDY="
+      },
+      {
+         "name": "X-OriginatorOrg",
+         "value": "tigo.co.tz"
+      },
+      {
+         "name": "X-MS-Exchange-CrossTenant-OriginalArrivalTime",
+         "value": "10 Sep 2019 15:31:59.4726 (UTC)"
+      },
+      {
+         "name": "X-MS-Exchange-CrossTenant-Network-Message-Id",
+         "value": "81c6f32d-89a7-4059-e4d9-08d7360405cb"
+      },
+      {
+         "name": "X-MS-Exchange-CrossTenant-Id",
+         "value": "650039fd-712a-4fe1-b863-86103c425c17"
+      },
+      {
+         "name": "X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp",
+         "value": "TenantId=650039fd-712a-4fe1-b863-86103c425c17;Ip=[41.222.176.202];Helo=[mailbox01.tigo.co.tz]"
+      },
+      {
+         "name": "X-MS-Exchange-CrossTenant-FromEntityHeader",
+         "value": "HybridOnPrem"
+      },
+      {
+         "name": "X-MS-Exchange-Transport-CrossTenantHeadersStamped",
+         "value": "AM4PR0902MB1889"
+      }
+   ],
+   "body": {
+      "size": 352,
+      "data": "U2FsaW8gbGFrbyBqaXB5YSBuaSBUU2ggMjMsOTk3LiBVbWVwb2tlYSBUU2ggMTAwIGt1dG9rYSBrd2EgMjU1NzEzMTIzMDY2IC0gRkFUSEVSIEUuIE5LQVlBTUJBLCBrdW1idWt1bWJ1IG5vLlBQLjE5MDkxMC4xODMxLk40OTYyNTU5MDcuIDEwLzA5LzE5IDE4OjMxLg0KW1RpZ28gVGFuemFuaWFdDQpGdWxsIGRldGFpbHMgb2YgTWlsbGljb20gYW5kIG91ciBkaXNjbGFpbWVyIHNob3VsZCBiZSBpbnNwZWN0ZWQgYXQgaHR0cDovL3d3dy5taWxsaWNvbS5jb20vZW1haWxfZGlzY2xhaW1lci5jZm0gVGhpcyBlbWFpbCBzaG91bGQgYmUgcmVhZCBzb2xlbHkgaW4gY29uanVuY3Rpb24gd2l0aCBvdXIgZGlzY2xhaW1lci4NCg=="
+   }
+}
