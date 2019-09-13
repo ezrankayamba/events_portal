@@ -12,6 +12,9 @@ import re
 import base64
 import datetime
 import json
+# import logging
+
+# logger = logging.getLogger(__name__)
 
 LABEL_SUCCESS = 'ReadMails/IOP1002/Success'
 LABEL_FAIL = 'ReadMails/IOP1002/Fail'
@@ -73,7 +76,8 @@ def parse_mail(msg_text):
             else:
                 print(f'No match => {key}|{regex}|{msg_text}')
     except Exception as e:
-        print('Error:', e)
+        print('Error:', f'Error: {e}')
+        # logger.error(e)
     print(f'No match for all available regex: {msg_text}')
     return False
 
@@ -100,6 +104,7 @@ def mail_reader_thread():
     labels = my_labels(service)
     while True:
         print('Reading mail...')
+        logger.info(f'Reading mail ...')
         # results = service.users().messages().list(userId='me', labelIds=['INBOX'], q='is:unread').execute()
         results = service.users().messages().list(userId='me', labelIds=['INBOX'], q='from:Tigo.Pesa@tigo.co.tz').execute()
         messages = results.get('messages', [])
@@ -121,13 +126,14 @@ def mail_reader_thread():
             else:
                 msg_text = base64.b64decode(payload['body']['data']).decode('UTF-8')
 
-            if msg_text:
-                parse_mail(msg_text)
+            if msg_text and parse_mail(msg_text):
                 print('Successfully parsed the mail')
+                # logger.info('Successfully parsed the mail')
                 msg_labels = {'removeLabelIds': ['INBOX'], 'addLabelIds': [labels['success']]}
                 service.users().messages().modify(userId='me', id=message['id'], body=msg_labels).execute()
             else:
                 print('Failed to parse the mail')
+                # logger.error('Successfully parsed the mail')
                 msg_labels = {'removeLabelIds': ['INBOX'], 'addLabelIds': [labels['fail']]}
                 service.users().messages().modify(userId='me', id=message['id'], body=msg_labels).execute()
             # break
