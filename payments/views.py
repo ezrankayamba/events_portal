@@ -18,7 +18,7 @@ class PaymentsListView(LoginRequiredMixin, ListView):
     template_name = 'payments/home.html'
     context_object_name = 'payments'
     ordering = ['-trans_date']
-    paginate_by = 5
+    paginate_by = 10
 
 
 class CompanyPaymentListView(LoginRequiredMixin, ListView):
@@ -26,7 +26,7 @@ class CompanyPaymentListView(LoginRequiredMixin, ListView):
     template_name = 'payments/home.html'
     context_object_name = 'payments'
     ordering = ['-trans_date']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         company = get_object_or_404(Company, id=self.kwargs.get('company_id'))
@@ -85,7 +85,7 @@ class CompanyTicketsListView(LoginRequiredMixin, ListView):
     template_name = 'payments/tickets.html'
     context_object_name = 'tickets'
     ordering = ['-issue_date']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         company = get_object_or_404(Company, id=self.kwargs.get('company_id'))
@@ -97,7 +97,7 @@ class AllTicketsListView(LoginRequiredMixin, ListView):
     template_name = 'payments/tickets.html'
     context_object_name = 'tickets'
     ordering = ['-issue_date']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         return Ticket.objects.order_by('-issue_date')

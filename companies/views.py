@@ -21,7 +21,7 @@ class CompanyListView(ListView):
     template_name = 'companies/home.html'
     context_object_name = 'companies'
     ordering = ['-name']
-    paginate_by = 5
+    paginate_by = 10
 
 
 class CompanyDetailView(DetailView):
