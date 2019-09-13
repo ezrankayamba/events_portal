@@ -63,6 +63,7 @@ def parse_mail(msg_text):
                 pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_date', 'trans_id', 'balance')
             if key.startswith('iop.receiving'):
                 pattern = ('prefix', 'balance', 'amount', 'channel', 'payer_account', 'payer_name', 'trans_id', 'receipt_no', 'trans_date')
+            print(f'Match: {match}')
             if len(match) == len(pattern):
                 result = dict(zip(pattern, match))
                 result['msg_key'] = key
@@ -71,12 +72,12 @@ def parse_mail(msg_text):
                     result['receipt_no'] = 'ON-NET'
                 print(result)
                 author, company = authoring()
-                record_payment(result, author, company)
+                # record_payment(result, author, company)
                 return True
             else:
                 print(f'No match => {key}|{regex}|{msg_text}')
     except Exception as e:
-        print('Error:', f'Error: {e}')
+        print(f'Error: {e}')
         # logger.error(e)
     print(f'No match for all available regex: {msg_text}')
     return False
@@ -162,3 +163,4 @@ def test_messages():
             # print('\n', msg['id'])
             # print(msg['message'])
             parse_mail(msg['message'])
+            print('\n\n')
