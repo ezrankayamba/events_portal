@@ -104,7 +104,7 @@ def mail_reader_thread():
     labels = my_labels(service)
     while True:
         print('Reading mail...')
-        logger.info(f'Reading mail ...')
+        # logger.info(f'Reading mail ...')
         # results = service.users().messages().list(userId='me', labelIds=['INBOX'], q='is:unread').execute()
         results = service.users().messages().list(userId='me', labelIds=['INBOX'], q='from:Tigo.Pesa@tigo.co.tz').execute()
         messages = results.get('messages', [])
