@@ -33,7 +33,7 @@ def record_payment(params, author, company):
                           payee_account=company.account,
                           payee_name=company.name,
                           amount=params['amount'].replace(',', ''),
-                          trans_date=datetime.datetime.strptime(params['trans_date'], '%d/%m/%y %H:%M'),
+                          trans_date=datetime.datetime.strptime(params['trans_date'].strip(), '%d/%m/%y %H:%M'),
                           author=author,
                           company=company,
                           channel=params['channel'],
