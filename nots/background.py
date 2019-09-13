@@ -72,7 +72,7 @@ def parse_mail(msg_text):
                     result['receipt_no'] = 'ON-NET'
                 print(result)
                 author, company = authoring()
-                # record_payment(result, author, company)
+                record_payment(result, author, company)
                 return True
             else:
                 print(f'No match => {key}|{regex}|{msg_text}')
