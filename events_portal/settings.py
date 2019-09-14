@@ -25,13 +25,15 @@ SECRET_KEY = '&m7=sr!6@59v%dlgutdycxrtah0m)&gu&n(sy!knxqa(nmx+yb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'pincomtz.net', '3.9.255.250', 'www.pincomtz.net']
+ALLOWED_HOSTS = ['localhost', 'pincomtz.net',
+                 '3.9.255.250', 'www.pincomtz.net']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'base.apps.BaseConfig',
+    'nots.apps.NotsConfig',
     'payments.apps.PaymentsConfig',
     'users.apps.UsersConfig',
     'companies.apps.CompaniesConfig',
