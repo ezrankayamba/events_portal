@@ -33,11 +33,10 @@ class PaymentResource(resources.ModelResource):
             role = self.user.profile.role
             if role:
                 if role.is_internal:
-                    return Payment.objects.all()
+                    return Payment.objects.all().order_by('-trans_date')
                 else:
                     company = self.user.companyuser.company
-                    print('Company: ', company)
-                    return Payment.objects.filter(company=company)
+                    return Payment.objects.filter(company=company).order_by('-trans_date')
         print('Not allowed to export!')
         return []
 
@@ -71,10 +70,9 @@ class TicketResource(resources.ModelResource):
             print(f'User: {self.user}, Role: {role}')
             if role:
                 if role.is_internal:
-                    return Ticket.objects.all()
+                    return Ticket.objects.all().order_by('-issue_date')
                 else:
                     region = self.user.companyuser.region
-                    print('Region: ', region)
-                    return Ticket.objects.filter(region=region)
+                    return Ticket.objects.filter(region=region).order_by('-issue_date')
         print('Not allowed to export!')
         return []
