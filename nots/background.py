@@ -45,7 +45,7 @@ def record_payment(params, author, company):
         payment.save()
         print('Saved', payment)
     except Exception as e:
-        print('Error during saving? ',e)
+        print('Error during saving? ')
         raise e
 
 
