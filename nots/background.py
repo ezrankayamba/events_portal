@@ -81,6 +81,7 @@ def parse_mail(msg_text, record_payment=True):
                 if record_payment:
                     print(f'Recording payment...')
                     author, company = authoring()
+                    print(author, company)
                     record_payment(result, author, company)
                 return True
             else:
