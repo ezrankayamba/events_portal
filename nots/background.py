@@ -27,8 +27,9 @@ with open('trans_type_regex.properties', 'r') as regex_file:
 
 def record_payment(params, author, company):
     try:
+        payer_account = params['payer_account'] if params['payer_account'].startswith('255') else f'255{params['payer_account']}'
         payment = Payment(trans_id=params['trans_id'],
-                          payer_account=params['payer_account'],
+                          payer_account=payer_account,
                           payer_name=params['payer_name'],
                           payee_account=company.account,
                           payee_name=company.name,
@@ -42,6 +43,7 @@ def record_payment(params, author, company):
         payment.save()
     except Exception as e:
         print(e)
+        raise e
 
 
 def authoring():
@@ -76,6 +78,7 @@ def parse_mail(msg_text, record_payment=True):
                     result['receipt_no'] = 'ON-NET'
                 print(result)
                 if record_payment:
+                    print(f'Recording payment...')
                     author, company = authoring()
                     record_payment(result, author, company)
                 return True
