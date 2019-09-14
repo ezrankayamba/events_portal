@@ -41,9 +41,11 @@ def record_payment(params, author, company):
                           company=company,
                           channel=params['channel'],
                           receipt_no=params['receipt_no'])
+        print('Unsaved', payment)
         payment.save()
+        print('Saved', payment)
     except Exception as e:
-        print(e)
+        print('Error during saving? ',e)
         raise e
 
 
