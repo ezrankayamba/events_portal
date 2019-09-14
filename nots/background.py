@@ -27,7 +27,8 @@ with open('trans_type_regex.properties', 'r') as regex_file:
 
 def record_payment(params, author, company):
     try:
-        payer_account = params['payer_account'] if params['payer_account'].startswith('255') else f'255{params['payer_account']}'
+        pa = params['payer_account']
+        payer_account = pa if pa.startswith('255') else f'255{pa}'
         payment = Payment(trans_id=params['trans_id'],
                           payer_account=payer_account,
                           payer_name=params['payer_name'],
