@@ -27,7 +27,7 @@ with open('trans_type_regex.properties', 'r') as regex_file:
 
 def record_payment(params, author, company):
     try:
-        print('Recording ...',params, author, company)
+        print('Recording ...', params, author, company)
         pa = params['payer_account']
         payer_account = pa if pa.startswith('255') else f'255{pa}'
         payment = Payment(trans_id=params['trans_id'],
@@ -46,7 +46,7 @@ def record_payment(params, author, company):
         payment.save()
         print('Saved', payment)
     except Exception as e:
-        print('Error during saving? ')
+        print('Error during saving? ', e)
         # raise e
 
 
@@ -57,7 +57,7 @@ def authoring():
     return (author, company)
 
 
-def parse_mail(msg_text, record_payment=True):
+def parse_mail(msg_text, dry_run=False):
     try:
         for regex_line in regex_lines:
             key, regex = tuple(regex_line.split('='))
@@ -81,7 +81,7 @@ def parse_mail(msg_text, record_payment=True):
                     result['channel'] = 'Tigo'
                     result['receipt_no'] = 'ON-NET'
                 print(result)
-                if record_payment:
+                if not dry_run:
                     print(f'Recording payment...')
                     author, company = authoring()
                     print(author, company)
@@ -185,5 +185,5 @@ def test_messages():
         for msg in messages:
             # print('\n', msg['id'])
             # print(msg['message'])
-            parse_mail(msg['message'], record_payment=False)
+            parse_mail(msg['message'], dry_run=False)
             print('\n\n')
