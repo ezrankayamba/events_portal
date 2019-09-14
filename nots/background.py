@@ -27,6 +27,7 @@ with open('trans_type_regex.properties', 'r') as regex_file:
 
 def record_payment(params, author, company):
     try:
+        print('Recording ...',params, author, company)
         pa = params['payer_account']
         payer_account = pa if pa.startswith('255') else f'255{pa}'
         payment = Payment(trans_id=params['trans_id'],
@@ -46,7 +47,7 @@ def record_payment(params, author, company):
         print('Saved', payment)
     except Exception as e:
         print('Error during saving? ')
-        raise e
+        # raise e
 
 
 def authoring():
