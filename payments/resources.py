@@ -7,10 +7,21 @@ from import_export.widgets import ForeignKeyWidget
 
 
 class PaymentResource(resources.ModelResource):
+    trans_id = fields.Field(column_name='Trans ID', attribute='trans_id')
+    channel = fields.Field(column_name='Channel', attribute='channel')
+    receipt_no = fields.Field(column_name='Rceipt No', attribute='receipt_no')
+    payer_account = fields.Field(
+        column_name='Payer MSISDN', attribute='payer_account')
+    payer_name = fields.Field(column_name='Payer Name', attribute='payer_name')
+    trans_date = fields.Field(column_name='Trans Date', attribute='trans_date')
+    amount = fields.Field(column_name='Amount', attribute='amount')
+    ticket_issued = fields.Field(
+        column_name='Ticket Issued', attribute='ticket_issued')
+
     class Meta:
         model = Payment
-        fields = ['trans_id', 'payer_account', 'payer_name', 'payee_account', 'payee_name', 'amount',
-                  'record_date', 'trans_date', 'author', 'company', 'ticket_issued', 'channel', 'receipt_no']
+        fields = ['trans_id', 'channel', 'receipt_no', 'payer_account', 'payer_name', 'trans_date',
+                  'amount', 'ticket_issued']
 
 
 class TicketResource(resources.ModelResource):
