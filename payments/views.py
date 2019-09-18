@@ -7,8 +7,7 @@ from django.contrib.auth.models import User
 from .forms import IssueTicketForm
 from django.urls import reverse
 from django.contrib import messages
-from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView)
+from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from django.http import HttpResponse
 from .resources import PaymentResource, TicketResource
 from django.db.models import Q
@@ -44,15 +43,13 @@ class UserTicketingFormListView(LoginRequiredMixin, FormView):
         initial = super(UserTicketingFormListView, self).get_initial(**kwargs)
         company_id = self.kwargs.get('company_id')
         self.company = Company.objects.filter(pk=company_id).first()
-        self.success_url = reverse(
-            'user-ticketing', kwargs={'company_id': company_id})
+        self.success_url = reverse('user-ticketing', kwargs={'company_id': company_id})
         return initial
 
     def get_context_data(self, **kwargs):
         company_id = self.kwargs.get('company_id')
         kwargs['company'] = Company.objects.filter(pk=company_id).first()
-        kwargs['tickets'] = Ticket.objects.filter(
-            issuer=self.request.user.companyuser).order_by('-issue_date')
+        kwargs['tickets'] = Ticket.objects.filter(issuer=self.request.user.companyuser).order_by('-issue_date')
         return super(UserTicketingFormListView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
@@ -60,8 +57,7 @@ class UserTicketingFormListView(LoginRequiredMixin, FormView):
         data = form.cleaned_data
         print('Cleaned data: ', data)
         if data['trans_id'].strip() == 'ON-NET':
-            messages.warning(
-                self.request, f'Failed, "ON-NET" is not valid Transaction ID')
+            messages.warning(self.request, f'Failed, "ON-NET" is not valid Transaction ID')
         else:
             payment = Payment.objects.filter(Q(payer_account=data['payer_account']), Q(
                 trans_id=data['trans_id']) | Q(receipt_no=data['trans_id'])).first()
@@ -75,8 +71,7 @@ class UserTicketingFormListView(LoginRequiredMixin, FormView):
                     messages.warning(
                         self.request, 'Alert, The ticket(s) for this payment already issued!')
                 elif not count:
-                    messages.warning(
-                        self.request, 'Fail, not enough amount to purchase a ticket!')
+                    messages.warning(self.request, 'Fail, not enough amount to purchase a ticket!')
                 else:
                     ticket = Ticket(payment=payment, unit_price=unit_price, ticket_value=payment.amount,
                                     ticket_count=count, balance=balance, issuer=cu, region=cu.region)
@@ -96,7 +91,7 @@ class CompanyTicketsListView(LoginRequiredMixin, ListView):
     template_name = 'payments/tickets.html'
     context_object_name = 'tickets'
     ordering = ['-issue_date']
-    paginate_by = 7
+    paginate_by = 10
 
     def get_queryset(self):
         company = get_object_or_404(Company, id=self.kwargs.get('company_id'))
@@ -108,7 +103,7 @@ class AllTicketsListView(LoginRequiredMixin, ListView):
     template_name = 'payments/tickets.html'
     context_object_name = 'tickets'
     ordering = ['-issue_date']
-    paginate_by = 7
+    paginate_by = 10
 
     def get_queryset(self):
         return Ticket.objects.order_by('-issue_date')
