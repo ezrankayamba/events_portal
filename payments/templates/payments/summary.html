@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Summary</title>
+    <script type="text/javascript">
+        let data=[
+                {"region_name": 'None', "issuer_name": "fiesta.admin", "channel": 'None', "count": 1, "sum": 300, "ticket_count": 1},
+                {"region_name": "Dar Es Salaam", "issuer_name": "fiesta.admin", "channel": 'None', "count": 2, "sum": 1100, "ticket_count": 11},
+                {"region_name": "Dar Es Salaam", "issuer_name": "fiesta.admin", "channel": "Vodacom", "count": 1, "sum": 1000, "ticket_count": 10}
+            ];
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <table class="table" id="treeTable">
+        <tr><th></th><th>Count</th><th>Sum</th></tr>
+    </table>
+</div>
+<script type="text/javascript">
+    (function(){
+        // console.log("Running...", data)
+
+        function getUnique(arr, comp) {
+          const unique = arr.map(e => e[comp])
+            .map((e, i, final) => final.indexOf(e) === i && i)
+            .filter(e => arr[e]).map(e => arr[e]);
+           return unique;
+        }
+
+
+        let root, region, issuer
+        data.forEach((row)=>{
+           let r_name=row.region_name
+           let i_name=row.issuer_name
+           let channel={
+            name:row.channel,
+            count: row.ticket_count,
+            sum:row.sum
+           }
+           // console.log(channel)
+           if (!issuer || issuer.name !== i_name){
+                issuer={
+                    name:i_name,
+                    subs:[]
+                }
+           }
+           issuer.subs.push(channel)
+           issuer.subs=getUnique(issuer.subs,'name')
+
+           if (!region || region.name !== r_name){
+             region={
+                name:r_name,
+                subs:[]
+             }
+           }
+           region.subs.push(issuer)
+           region.subs=getUnique(region.subs,'name')
+
+           if(!root){
+             root={subs:[]}
+           }
+           root.subs.push(region)
+           root.subs=getUnique(root.subs,'name')
+
+           console.log(region)
+        })
+        let treeTable=document.getElementById('treeTable')
+        let compute=(node)=>{
+            console.log(node)
+            let sum=0;
+            let count=0;
+            if(node.subs){
+                node.subs.forEach((s)=>{
+                    let res=compute(s)
+                    s.sum=res.sum;
+                    s.count=res.count;
+
+                    sum=sum+res.sum;
+                    count=count+res.count;
+                })
+            }else{
+                sum=node.sum;
+                count=node.count;
+            }
+            return {sum:sum, count:count}
+        }
+        let renderTT=(node, indent)=>{
+            console.log(node)
+            var spaces = " ".repeat(indent);
+            if(node.subs){
+                node.subs.forEach((s)=>{
+                    let tr=document.createElement('tr')
+                    let label=document.createElement('td')
+                    label.innerHTML=`<pre>${spaces} ${s.name}</pre>`
+                    let count=document.createElement('td')
+                    count.innerHTML =`${s.count}`
+                    let sum=document.createElement('td')
+                    sum.innerHTML =`${s.sum}`
+                    tr.appendChild(label)
+                    tr.appendChild(count)
+                    tr.appendChild(sum)
+                    treeTable.appendChild(tr)
+                    renderTT(s, indent+2)
+                })
+            }
+        }
+        compute(root)
+        renderTT(root, 1)
+    })();
+</script>
+</body>
+</html>
