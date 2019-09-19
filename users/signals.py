@@ -20,7 +20,7 @@ def notify_created(user):
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-        # notify_created(instance)
+        notify_created(instance)
 
 
 @receiver(post_save, sender=User)
