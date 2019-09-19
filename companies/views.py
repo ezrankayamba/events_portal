@@ -27,6 +27,11 @@ class CompanyListView(ListView):
 class CompanyDetailView(DetailView):
     model = Company
 
+    def get_context_data(self, **kwargs):
+        url = self.request.build_absolute_uri('/login')
+        kwargs['login_url'] = url
+        return super(CompanyDetailView, self).get_context_data(**kwargs)
+
 
 class CompanyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Company
@@ -104,7 +109,7 @@ class CompanyUserCreateView(LoginRequiredMixin, FormView):
         profile = user.profile
         profile.role = Role.objects.get(pk=data['role'])
         profile.save()
-        company_user = CompanyUser(user=user, company=self.company)
+        company_user = CompanyUser(user=user, company=self.company, region=Region.objects.get(pk=data['region']))
         company_user.save()
         return super().form_valid(form)
 
