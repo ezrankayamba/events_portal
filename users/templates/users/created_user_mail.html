@@ -6,12 +6,13 @@
         body{
             background: #f1f1f1;
         }
-        button.login{
+        .login{
             background: #3333FF;
             color: white;
             border: none;
             padding: .4rem 1rem;
             border-radius: .2rem;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -21,8 +22,6 @@
     {% if user.companyuser %}
         <p>Your company is <b>{{ user.companyuser.company }}</b></p>
     {% endif %}
-    <form action="{{ login_url %}" method="GET">
-        <button class="login">Login</button>
-    </form>
+    <a class="login" href="https://www.pincomtz.net{% url 'login' %}">Login</a>
 </body>
 </html>

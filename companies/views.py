@@ -27,11 +27,6 @@ class CompanyListView(ListView):
 class CompanyDetailView(DetailView):
     model = Company
 
-    def get_context_data(self, **kwargs):
-        url = self.request.build_absolute_uri('/login')
-        kwargs['login_url'] = url
-        return super(CompanyDetailView, self).get_context_data(**kwargs)
-
 
 class CompanyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Company
