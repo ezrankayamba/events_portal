@@ -131,7 +131,7 @@ LOGIN_URL = 'login'
 
 with open('/etc/config.json') as fp:
     config = json.load(fp)
-    print(config)
+    # print(config)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
