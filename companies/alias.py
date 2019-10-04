@@ -1,5 +1,5 @@
 from itertools import product
-from companies.models import Company
+from .models import Company
 
 
 def not_used(a):

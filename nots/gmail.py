@@ -39,9 +39,10 @@ def create_labels(service, name):
     return (res1, res2, res3)
 
 
-def setup_alias(service, name):
+def setup_alias(service, name, email):
     res = create_labels(service, name)
-    alias_email = f'{base_email}+{name}@gmail.com'
+    # alias_email = f'{base_email}+{name}@gmail.com'
+    alias_email = email
     print(alias_email)
     fltr = {
         'criteria': {'to': alias_email},
