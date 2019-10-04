@@ -38,7 +38,7 @@ class CompanyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class CompanyCreateView(LoginRequiredMixin, CreateView):
     model = Company
-    fields = ['name', 'account', 'email', 'password']
+    fields = ['name', 'account', 'email']
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -46,7 +46,7 @@ class CompanyCreateView(LoginRequiredMixin, CreateView):
 
 class CompanyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Company
-    fields = ['name', 'account', 'email', 'password']
+    fields = ['name', 'account', 'email']
 
     def form_valid(self, form):
         return super().form_valid(form)

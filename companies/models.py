@@ -8,7 +8,7 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     account = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=100, default='notabblicable')
 
     def __str__(self):
         return f'{self.name}'

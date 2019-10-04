@@ -25,8 +25,7 @@ def record_payment(params, author, company):
                           payee_account=company.account,
                           payee_name=company.name,
                           amount=params['amount'].replace(',', ''),
-                          trans_date=datetime.datetime.strptime(
-                              params['trans_date'].strip(), '%d/%m/%y %H:%M'),
+                          trans_date=datetime.datetime.strptime(params['trans_date'].strip(), '%d/%m/%y %H:%M'),
                           author=author,
                           company=company,
                           channel=params['channel'],
@@ -40,7 +39,6 @@ def record_payment(params, author, company):
 
 
 def authoring(email):
-    # print('Email:', email)
     (username, name) = tuple(email.split('@')[0].split('+'))
     company = Company.objects.filter(email=email).first()
     author, created = User.objects.get_or_create(
@@ -59,14 +57,11 @@ def parse_mail(author, company, msg_text, dry_run=False):
             match = test[0] if test else None
             if not match:
                 continue
-            pattern = ('prefix', 'amount', 'payer_account',
-                       'payer_name', 'trans_id', 'trans_date', 'balance')
+            pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_id', 'trans_date', 'balance')
             if key == 'tigopesa.en':
-                pattern = ('prefix', 'amount', 'payer_account',
-                           'payer_name', 'trans_date', 'trans_id', 'balance')
+                pattern = ('prefix', 'amount', 'payer_account', 'payer_name', 'trans_date', 'trans_id', 'balance')
             if key.startswith('iop.receiving'):
-                pattern = ('prefix', 'balance', 'amount', 'channel', 'payer_account',
-                           'payer_name', 'trans_id', 'receipt_no', 'trans_date')
+                pattern = ('prefix', 'balance', 'amount', 'channel', 'payer_account', 'payer_name', 'trans_id', 'receipt_no', 'trans_date')
             print(f'Match: {match}')
             if len(match) == len(pattern):
                 result = dict(zip(pattern, match))
@@ -95,10 +90,8 @@ def mail_reader_thread():
         print('Reading mail...')
         for c in Company.objects.all():
             author, company = authoring(c.email)
-            # print(author, company)
             name = c.email.split('@')[0].split('+')[1]
             labels = gmail.my_labels(service, name)
-            # print(labels)
             q = 'from:Tigo.Pesa@tigo.co.tz'
             # q = 'from:ezrankayamba@gmail.com'
             msg_obj = service.users().messages()
@@ -110,15 +103,9 @@ def mail_reader_thread():
             for message in messages:
                 msg = msg_obj.get(userId='me', id=message['id']).execute()
                 payload = msg['payload']
-                subject = None
-                for h in payload['headers']:
-                    if h['name'] == 'Subject':
-                        subject = h['value']
-                        break
                 msg_text = None
                 if 'parts' in payload:
                     for p in payload['parts']:
-                        print(p)
                         if p['mimeType'] == 'text/plain':
                             data = p['body']['data']
                             msg_text = base64.b64decode(data).decode('UTF-8')
@@ -129,16 +116,12 @@ def mail_reader_thread():
 
                 if msg_text and parse_mail(author, company, msg_text):
                     print('Successfully parsed the mail')
-                    msg_labels = {'removeLabelIds': lbs_m,
-                                  'addLabelIds': lbs_s}
-                    service.users().messages().modify(
-                        userId='me', id=message['id'], body=msg_labels).execute()
+                    msg_labels = {'removeLabelIds': lbs_m, 'addLabelIds': lbs_s}
+                    service.users().messages().modify(userId='me', id=message['id'], body=msg_labels).execute()
                 else:
                     print('Failed to parse the mail')
-                    msg_labels = {'removeLabelIds': lbs_m,
-                                  'addLabelIds': lbs_f}
-                    service.users().messages().modify(
-                        userId='me', id=message['id'], body=msg_labels).execute()
+                    msg_labels = {'removeLabelIds': lbs_m, 'addLabelIds': lbs_f}
+                    service.users().messages().modify(userId='me', id=message['id'], body=msg_labels).execute()
                 # break
         time.sleep(15)
 
