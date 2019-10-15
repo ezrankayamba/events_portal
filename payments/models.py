@@ -15,7 +15,7 @@ class Payment(models.Model):
     record_date = models.DateTimeField(default=timezone.now)
     trans_date = models.DateTimeField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    company = models.ForeignKey(Company, to_field='account', null=True, on_delete=models.SET_NULL)
+    company = models.ForeignKey(Company, null=True, on_delete=models.SET_NULL)
     ticket_issued = models.BooleanField(default=False)
     channel = models.CharField(max_length=40, null=True)
     receipt_no = models.CharField(max_length=40, null=True)
