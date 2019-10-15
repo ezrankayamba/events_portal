@@ -18,13 +18,14 @@ class Company(models.Model):
 
 
 class Region(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
     is_active = models.BooleanField(default=False)
     price = models.DecimalField(decimal_places=0, max_digits=20)
 
     class Meta:
         ordering = ('name',)
+        unique_together = ['name', 'company']
 
     def __str__(self):
         return f'{self.name}'
