@@ -15,3 +15,10 @@ class IssueTicketForm(forms.Form):
         label="Transaction ID from service provider of the sernder",
         validators=[RegexValidator(r'^((?!ON-NET).)*$', message="Enter valid Transaction ID")]
     )
+
+
+class ManualEntryForm(forms.Form):
+    msg_text = forms.CharField(
+        label="Paste the message text here",
+        widget=forms.Textarea(attrs={'rows': 4})
+    )

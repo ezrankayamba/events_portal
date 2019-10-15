@@ -46,7 +46,7 @@ class CompanyCreateView(LoginRequiredMixin, CreateView):
 
 class CompanyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Company
-    fields = ['name', 'account']
+    fields = ['name', 'account', 'email']
 
     def form_valid(self, form):
         return super().form_valid(form)

@@ -29,9 +29,7 @@ def init_service():
 
 
 def create_labels(service, name):
-    m = f'ServiceNotifications/{name}'
-    s = f'ServiceNotifications/{name}/Success'
-    f = f'ServiceNotifications/{name}/Fail'
+    m, s, f = get_labels(name)
     labels = service.users().labels()
     res1 = labels.create(userId='me', body={'name': m}).execute()
     res2 = labels.create(userId='me', body={'name': s}).execute()
@@ -39,27 +37,33 @@ def create_labels(service, name):
     return (res1, res2, res3)
 
 
-def setup_alias(service, name, email):
-    res = create_labels(service, name)
-    # alias_email = f'{base_email}+{name}@gmail.com'
-    alias_email = email
-    print(alias_email)
+def get_name(c):
+    return f'COMP2{c.id:05}'
+
+
+def setup_alias(service, c):
+    res = create_labels(service, get_name(c))
     fltr = {
-        'criteria': {'to': alias_email},
+        'criteria': {'to': c.email},
         'action': {'addLabelIds': [res[0]['id']]}
     }
     settings = service.users().settings()
     return settings.filters().create(userId='me', body=fltr).execute()
 
 
-def my_labels(service, name):
+def get_labels(name):
+    m = f'Events/{name}'
+    s = f'Events/{name}/Success'
+    f = f'Events/{name}/Fail'
+    return (m, s, f)
+
+
+def my_labels(service, c):
+    name = get_name(c)
     results = service.users().labels().list(userId='me').execute()
     labels = results.get('labels', [])
-    m = f'ServiceNotifications/{name}'
-    s = f'ServiceNotifications/{name}/Success'
-    f = f'ServiceNotifications/{name}/Fail'
-    labels = list(
-        filter(lambda x: x['name'] == m or x['name'] == s or x['name'] == f, labels))
+    m, s, f = get_labels(name)
+    labels = list(filter(lambda x: x['name'] == m or x['name'] == s or x['name'] == f, labels))
     if len(labels) >= 2:
         res = {}
         for x in labels:

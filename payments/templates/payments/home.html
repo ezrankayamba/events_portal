@@ -6,7 +6,8 @@
           <h5>List of Payments</h5>
         </div>
         <div class="button-group">
-          <a href="{% url 'export-payments' %}" class="btn btn-sm btn-outline-primary"><span class="mr-2 oi oi-spreadsheet"></span> Export</a>
+          <a href="{% url 'manualentry-payment' %}" class="btn btn-sm btn-outline-secondary"><span class="mr-2 oi oi-spreadsheet"></span>Manual Entry</a>
+          <a href="{% url 'export-payments' %}" class="btn btn-sm btn-outline-primary"><span class="mr-2 oi oi-spreadsheet"></span>Export</a>
         </div>
     </div>
     {% if payments %}

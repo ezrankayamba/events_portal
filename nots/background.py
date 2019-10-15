@@ -33,20 +33,21 @@ def record_payment(params, author, company):
         # print('Unsaved', payment)
         payment.save()
         print('Saved: ', payment)
+        return True
     except Exception as e:
         print('Error during saving? ', e)
-        # raise e
+        return False
 
 
-def authoring(email):
-    (username, name) = tuple(email.split('@')[0].split('+'))
-    company = Company.objects.filter(email=email).first()
-    author, created = User.objects.get_or_create(
-        username=username,
-        email=f'{username}@gmail.com',
-        password='notapplicable'
-    )
-    return (author, company)
+# def authoring(email):
+#     username = 'service.events'
+#     company = Company.objects.filter(email=email).first()
+#     author, created = User.objects.get_or_create(
+#         username=username,
+#         email=f'{username}@gmail.com',
+#         password='notapplicable'
+#     )
+#     return (author, company)
 
 
 def parse_mail(author, company, msg_text, dry_run=False):
@@ -72,28 +73,33 @@ def parse_mail(author, company, msg_text, dry_run=False):
                 print(result)
                 if not dry_run:
                     print(f'Recording payment...')
-                    record_payment(result, author, company)
+                    return record_payment(result, author, company)
                 return True
             else:
                 print(f'No match => {key}|{regex}|{msg_text}')
     except Exception as e:
         print(f'Error: {e}')
-        # logger.error(e)
     print(f'No match for all available regex: {msg_text}')
     return False
 
 
 def mail_reader_thread():
     service = gmail.init_service()
+    username = f'service.events'
+    email = f'{username}@gmail.com'
 
+    author, created = User.objects.get_or_create(
+        username=username,
+        email=email,
+        password='notapplicable'
+    )
     while True:
         print('Reading mail...')
         for c in Company.objects.all():
-            author, company = authoring(c.email)
-            name = c.email.split('@')[0].split('+')[1]
-            labels = gmail.my_labels(service, name)
+            # company = Company.objects.filter(email=c.email).first()
+
+            labels = gmail.my_labels(service, c)
             q = 'from:Tigo.Pesa@tigo.co.tz'
-            # q = 'from:ezrankayamba@gmail.com'
             msg_obj = service.users().messages()
             lbs_m = [labels['main']]
             lbs_s = [labels['success']]
@@ -114,7 +120,7 @@ def mail_reader_thread():
                     data = payload['body']['data']
                     msg_text = base64.b64decode(data).decode('UTF-8')
 
-                if msg_text and parse_mail(author, company, msg_text):
+                if msg_text and parse_mail(author, c, msg_text):
                     print('Successfully parsed the mail')
                     msg_labels = {'removeLabelIds': lbs_m, 'addLabelIds': lbs_s}
                     service.users().messages().modify(userId='me', id=message['id'], body=msg_labels).execute()

@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="borde-botton mb-1">Manual Entry Payment</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group mb-1">
+                <button class="btn btn-outline-info" type="submmit"><span class="oi oi-check"></span>Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock content%}

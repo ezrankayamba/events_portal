@@ -11,9 +11,14 @@ def create_profile(sender, instance, created, **kwargs):
     if created and email:
         instance.email = email
         instance.save()
-        name = instance.name.replace(' ', '')
+        # name = instance.name.replace(' ', '')
         service = gmail.init_service()
-        gmail.setup_alias(service, name, email)
+        gmail.setup_alias(service, instance)
+    else:
+        service = gmail.init_service()
+        if gmail.my_labels(service, instance) == None:
+            gmail.setup_alias(service, instance)
+            print('Email setup done!')
 
 
 def get_email():

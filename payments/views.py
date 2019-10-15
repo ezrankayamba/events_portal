@@ -4,7 +4,7 @@ from .models import Payment, Ticket
 from companies.models import Company
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
-from .forms import IssueTicketForm
+from .forms import IssueTicketForm, ManualEntryForm
 from django.urls import reverse
 from django.contrib import messages
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
@@ -12,6 +12,7 @@ from django.http import HttpResponse
 from .resources import PaymentResource, TicketResource
 from django.db.models import Q
 from datetime import datetime
+from nots.background import parse_mail
 
 
 class PaymentsListView(LoginRequiredMixin, ListView):
@@ -20,6 +21,26 @@ class PaymentsListView(LoginRequiredMixin, ListView):
     context_object_name = 'payments'
     ordering = ['-trans_date']
     paginate_by = 7
+
+
+class ManualEntryFormView(LoginRequiredMixin, FormView):
+    form_class = ManualEntryForm
+    template_name = 'payments/manualentry.html'
+    # success_url = '/'
+
+    def form_valid(self, form):
+        user = self.request.user
+        company = user.companyuser.company
+        data = form.cleaned_data
+        print('Cleaned data: ', data)
+        self.success_url = reverse('company-payments', args=(company.id,))
+        res_success = parse_mail(user, company, data['msg_text'])
+        # print('Success' if res_success else 'Fail')
+        if res_success:
+            messages.success(self.request, f'Manuel entry payment successfully recorded')
+        else:
+            messages.warning(self.request, f'Manuel entry payment failed, it might be existing already or invalid message format!')
+        return super().form_valid(form)
 
 
 class CompanyPaymentListView(LoginRequiredMixin, ListView):
