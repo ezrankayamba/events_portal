@@ -11,6 +11,7 @@
         </div>
     </div>
     {% if payments %}
+    <div class="table-responsive">
         <table class="small table table-bordered table-sm table-striped table-hover">
             <thead>
                 <tr>
@@ -25,20 +26,21 @@
                 </tr>
             </thead>
             <tbody>
-        {% for m in payments %}
-                <tr>
-                  <td scope="row">{{ m.trans_id }}</td>
-                  <td>{{ m.channel }}</td>
-                  <td>{{ m.receipt_no }}</td>
-                  <td>{{ m.payer_account }}</td>
-                  <td>{{ m.payer_name }}</td>
-                  <td>{{ m.trans_date|date:"d/m/y H:i" }}</td>
-                  <td>{{ m.amount|intcomma }}</td>
-                  <td>{{ m.ticket_issued }}</td>
-                </tr>
-        {% endfor %}
+              {% for m in payments %}
+                      <tr>
+                        <td scope="row">{{ m.trans_id }}</td>
+                        <td>{{ m.channel }}</td>
+                        <td>{{ m.receipt_no }}</td>
+                        <td>{{ m.payer_account }}</td>
+                        <td>{{ m.payer_name }}</td>
+                        <td>{{ m.trans_date|date:"d/m/y H:i" }}</td>
+                        <td>{{ m.amount|intcomma }}</td>
+                        <td>{{ m.ticket_issued }}</td>
+                      </tr>
+              {% endfor %}
             </tbody>
         </table>
+    </div>
         {% if is_paginated %}
               {% if page_obj.has_previous %}
                 <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>

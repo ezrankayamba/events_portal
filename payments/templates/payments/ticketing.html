@@ -16,6 +16,7 @@
     </div>
     <h5>Issued tickets</h5>
     {% if tickets %}
+    <div class="table-responsive">
         <table class="small table table-bordered table-sm table-striped table-hover">
             <thead>
                 <tr>
@@ -30,20 +31,21 @@
                 </tr>
             </thead>
             <tbody>
-        {% for m in tickets %}
-                <tr>
-                  <td scope="row">{{ m.payment.trans_id }}</td>
-                  <td scope="row">{{ m.region }}</td>
-                  <td>{{ m.issue_date|date:"d/m/y H:i" }}</td>
-                  <td>{{ m.issuer }}</td>
-                  <td>{{ m.ticket_value|intcomma }}</td>
-                  <td>{{ m.unit_price|intcomma }}</td>
-                  <td>{{ m.ticket_count }}</td>
-                  <td>{{ m.balance|intcomma }}</td>
-                </tr>
-        {% endfor %}
+              {% for m in tickets %}
+                      <tr>
+                        <td scope="row">{{ m.payment.trans_id }}</td>
+                        <td scope="row">{{ m.region }}</td>
+                        <td>{{ m.issue_date|date:"d/m/y H:i" }}</td>
+                        <td>{{ m.issuer }}</td>
+                        <td>{{ m.ticket_value|intcomma }}</td>
+                        <td>{{ m.unit_price|intcomma }}</td>
+                        <td>{{ m.ticket_count }}</td>
+                        <td>{{ m.balance|intcomma }}</td>
+                      </tr>
+              {% endfor %}
             </tbody>
         </table>
+    </div>
         {% if is_paginated %}
               {% if page_obj.has_previous %}
                 <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>

@@ -9,6 +9,7 @@
         </div>
     </div>
     {% if companies %}
+    <div class="table-responsive">
         <table class="table table-bordered table-sm table-striped table-hover">
             <thead>
                 <tr>
@@ -19,20 +20,21 @@
                 </tr>
             </thead>
             <tbody>
-        {% for m in companies%}
-                <tr>
-                  <td scope="row">{{ m.name }}</td>
-                  <td>{{ m.account }}</td>
-                  <td>{{ m.email }}</td>
-                  <td>
-                    <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
-                    <a href="{% url 'company-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
-                    <a href="{% url 'company-detail' m.id %}" class="btn btn-sm"><span class="oi oi-cog"></span></a>
-                  </td>
-                </tr>
-        {% endfor %}
+              {% for m in companies%}
+                      <tr>
+                        <td scope="row">{{ m.name }}</td>
+                        <td>{{ m.account }}</td>
+                        <td>{{ m.email }}</td>
+                        <td>
+                          <a href="{% url 'company-delete' m.id %}" class="btn btn-sm"><span class="oi oi-trash"></span></a>
+                          <a href="{% url 'company-update' m.id %}" class="btn btn-sm"><span class="oi oi-pencil"></span></a>
+                          <a href="{% url 'company-detail' m.id %}" class="btn btn-sm"><span class="oi oi-cog"></span></a>
+                        </td>
+                      </tr>
+              {% endfor %}
             </tbody>
         </table>
+    </div>
         {% if is_paginated %}
               {% if page_obj.has_previous %}
                 <a class="btn btn-sm btn-outline-info mb-4" href="?page=1">First</a>
